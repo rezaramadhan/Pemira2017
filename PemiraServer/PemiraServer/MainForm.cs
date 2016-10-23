@@ -15,6 +15,7 @@ namespace PemiraServer
         public MainForm()
         {
             InitializeComponent();
+            TreeNode newNode = new TreeNode("Text for new node");
         }
     }
 }
