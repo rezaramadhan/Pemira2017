@@ -15,7 +15,6 @@ namespace PemiraServer
         public MainForm()
         {
             InitializeComponent();
-            labelStatus.Text = "Listening";
         }
     }
 }
