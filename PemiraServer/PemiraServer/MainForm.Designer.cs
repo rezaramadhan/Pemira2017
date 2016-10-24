@@ -28,10 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node0");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node1");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node2");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node3");
             this.labelNIM = new System.Windows.Forms.Label();
             this.textBoxNIM = new System.Windows.Forms.TextBox();
             this.buttonSubmitNIM = new System.Windows.Forms.Button();
@@ -42,17 +38,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.listViewWaiting = new System.Windows.Forms.ListView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -76,6 +72,7 @@
             this.textBoxNIM.Name = "textBoxNIM";
             this.textBoxNIM.Size = new System.Drawing.Size(296, 38);
             this.textBoxNIM.TabIndex = 1;
+            this.textBoxNIM.KeyDown += new System.Windows.Forms.KeyEventHandler(enter_pressed);
             // 
             // buttonSubmitNIM
             // 
@@ -86,6 +83,7 @@
             this.buttonSubmitNIM.TabIndex = 2;
             this.buttonSubmitNIM.Text = "Submit";
             this.buttonSubmitNIM.UseVisualStyleBackColor = true;
+            this.buttonSubmitNIM.Click += new System.EventHandler(this.buttonSubmitNIM_Click);
             // 
             // pictureBox1
             // 
@@ -159,50 +157,6 @@
             this.panel1.Size = new System.Drawing.Size(232, 253);
             this.panel1.TabIndex = 9;
             // 
-            // panel2
-            // 
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label8);
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.label9);
-            this.panel2.Controls.Add(this.label10);
-            this.panel2.Controls.Add(this.buttonGrant2);
-            this.panel2.Controls.Add(this.label11);
-            this.panel2.Location = new System.Drawing.Point(499, 168);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(232, 253);
-            this.panel2.TabIndex = 10;
-            // 
-            // panel3
-            // 
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel3.Controls.Add(this.treeView1);
-            this.panel3.Controls.Add(this.label3);
-            this.panel3.Location = new System.Drawing.Point(23, 168);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(232, 253);
-            this.panel3.TabIndex = 10;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(25, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "NIM 1";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(25, 123);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(51, 20);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "NIM 2";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
@@ -222,6 +176,40 @@
             this.label7.Size = new System.Drawing.Size(52, 20);
             this.label7.TabIndex = 9;
             this.label7.Text = "time 1";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(25, 123);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(51, 20);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "NIM 2";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(25, 91);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(51, 20);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "NIM 1";
+            // 
+            // panel2
+            // 
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label8);
+            this.panel2.Controls.Add(this.label2);
+            this.panel2.Controls.Add(this.label9);
+            this.panel2.Controls.Add(this.label10);
+            this.panel2.Controls.Add(this.buttonGrant2);
+            this.panel2.Controls.Add(this.label11);
+            this.panel2.Location = new System.Drawing.Point(499, 168);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(232, 253);
+            this.panel2.TabIndex = 10;
             // 
             // label8
             // 
@@ -263,25 +251,26 @@
             this.label11.TabIndex = 11;
             this.label11.Text = "NIM 1";
             // 
-            // treeView1
+            // panel3
             // 
-            this.treeView1.Location = new System.Drawing.Point(27, 46);
-            this.treeView1.Name = "treeView1";
-            treeNode1.Name = "Node0";
-            treeNode1.Text = "Node0";
-            treeNode2.Name = "Node1";
-            treeNode2.Text = "Node1";
-            treeNode3.Name = "Node2";
-            treeNode3.Text = "Node2";
-            treeNode4.Name = "Node3";
-            treeNode4.Text = "Node3";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4});
-            this.treeView1.Size = new System.Drawing.Size(121, 97);
-            this.treeView1.TabIndex = 10;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.Controls.Add(this.listViewWaiting);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Location = new System.Drawing.Point(23, 168);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(232, 253);
+            this.panel3.TabIndex = 10;
+            // 
+            // listViewWaiting
+            // 
+            this.listViewWaiting.BackColor = System.Drawing.SystemColors.Control;
+            this.listViewWaiting.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listViewWaiting.Location = new System.Drawing.Point(17, 46);
+            this.listViewWaiting.Name = "listViewWaiting";
+            this.listViewWaiting.Size = new System.Drawing.Size(195, 189);
+            this.listViewWaiting.TabIndex = 11;
+            this.listViewWaiting.UseCompatibleStateImageBehavior = false;
+            this.listViewWaiting.View = System.Windows.Forms.View.List;
             // 
             // MainForm
             // 
@@ -331,7 +320,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.ListView listViewWaiting;
     }
 }
 
