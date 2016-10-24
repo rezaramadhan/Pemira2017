@@ -1,4 +1,5 @@
-﻿namespace PemiraServer
+﻿
+namespace PemiraServer
 {
     partial class MainForm
     {
@@ -38,12 +39,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label6 = new System.Windows.Forms.Label();
             this.labelTimerBilik1 = new System.Windows.Forms.Label();
             this.labelBilikNIM2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelBilikNIM1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.label8 = new System.Windows.Forms.Label();
             this.labelTimerBilik2 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -148,10 +147,9 @@
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.labelTimerBilik1);
             this.panel1.Controls.Add(this.labelBilikNIM2);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.labelBilikNIM1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.buttonGrant1);
             this.panel1.Location = new System.Drawing.Point(261, 168);
@@ -159,25 +157,15 @@
             this.panel1.Size = new System.Drawing.Size(232, 253);
             this.panel1.TabIndex = 9;
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(152, 123);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 20);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "time 2";
-            // 
             // labelTimerBilik1
             // 
             this.labelTimerBilik1.AutoSize = true;
             this.labelTimerBilik1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTimerBilik1.Location = new System.Drawing.Point(152, 91);
             this.labelTimerBilik1.Name = "labelTimerBilik1";
-            this.labelTimerBilik1.Size = new System.Drawing.Size(52, 20);
+            this.labelTimerBilik1.Size = new System.Drawing.Size(27, 20);
             this.labelTimerBilik1.TabIndex = 9;
-            this.labelTimerBilik1.Text = "time 1";
+            this.labelTimerBilik1.Text = "10";
             // 
             // labelBilikNIM2
             // 
@@ -189,20 +177,19 @@
             this.labelBilikNIM2.TabIndex = 8;
             this.labelBilikNIM2.Text = "NIM 2";
             // 
-            // label4
+            // labelBilikNIM1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(25, 91);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(51, 20);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "NIM 1";
+            this.labelBilikNIM1.AutoSize = true;
+            this.labelBilikNIM1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBilikNIM1.Location = new System.Drawing.Point(25, 91);
+            this.labelBilikNIM1.Name = "labelBilikNIM1";
+            this.labelBilikNIM1.Size = new System.Drawing.Size(60, 20);
+            this.labelBilikNIM1.TabIndex = 7;
+            this.labelBilikNIM1.Text = "1NIM 1";
             // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.label8);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.labelTimerBilik2);
             this.panel2.Controls.Add(this.label10);
@@ -213,25 +200,15 @@
             this.panel2.Size = new System.Drawing.Size(232, 253);
             this.panel2.TabIndex = 10;
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(149, 123);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(52, 20);
-            this.label8.TabIndex = 14;
-            this.label8.Text = "time 2";
-            // 
             // labelTimerBilik2
             // 
             this.labelTimerBilik2.AutoSize = true;
             this.labelTimerBilik2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTimerBilik2.Location = new System.Drawing.Point(149, 91);
             this.labelTimerBilik2.Name = "labelTimerBilik2";
-            this.labelTimerBilik2.Size = new System.Drawing.Size(52, 20);
+            this.labelTimerBilik2.Size = new System.Drawing.Size(27, 20);
             this.labelTimerBilik2.TabIndex = 13;
-            this.labelTimerBilik2.Text = "time 1";
+            this.labelTimerBilik2.Text = "10";
             // 
             // label10
             // 
@@ -315,11 +292,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label labelTimerBilik1;
         private System.Windows.Forms.Label labelBilikNIM2;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelBilikNIM1;
         private System.Windows.Forms.Label labelTimerBilik2;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
