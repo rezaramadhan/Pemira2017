@@ -61,7 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SocketClient.cs" />
     <Compile Include="TimerCountdown.cs">
       <SubType>Component</SubType>
     </Compile>

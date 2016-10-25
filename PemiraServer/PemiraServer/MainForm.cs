@@ -105,14 +105,5 @@ namespace PemiraServer
         {
             time2.Start();
         }
-
-        private void button1_Click(object sender, EventArgs e) {
-            SocketClient client = new SocketClient("127.0.0.1", 4949);
-            client.connect();
-            
-            client.send("Hello");
-
-            client.disconnect();
-        }
     }
 }

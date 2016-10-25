@@ -38,9 +38,5 @@ namespace PemiraServer {
 
             return s;
         }
-
-        public void disconnect() {
-            client.Close();
-        }
     }
 }
