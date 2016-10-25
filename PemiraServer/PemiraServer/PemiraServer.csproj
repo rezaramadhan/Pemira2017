@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="TimerCountdown.cs">
       <SubType>Component</SubType>
+    </Compile>
     <Compile Include="PemiraDBDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
