@@ -1,5 +1,4 @@
 ﻿using System.Windows.Forms;
-
 namespace PemiraServer
 {
     partial class MainForm
@@ -22,8 +21,6 @@ namespace PemiraServer
             base.Dispose(disposing);
         }
 
-
-        
         #region Windows Form Designer generated code
 
         /// <summary>
@@ -42,12 +39,13 @@ namespace PemiraServer
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.listViewBilik1 = new System.Windows.Forms.ListView();
             this.labelTimerBilik1 = new System.Windows.Forms.Label();
             this.labelBilikNIM2 = new System.Windows.Forms.Label();
+            this.labelBilikNIM1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.listViewBilik2 = new System.Windows.Forms.ListView();
             this.labelTimerBilik2 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.listViewWaiting = new System.Windows.Forms.ListView();
             this.button1 = new System.Windows.Forms.Button();
@@ -105,7 +103,7 @@ namespace PemiraServer
             this.buttonGrant1.TabIndex = 4;
             this.buttonGrant1.Text = "Grant Access";
             this.buttonGrant1.UseVisualStyleBackColor = true;
-            this.buttonGrant1.Click += new System.EventHandler(this.buttonGrant_Click);
+            this.buttonGrant1.Click += new System.EventHandler(this.buttonGrant1_Click);
             // 
             // buttonGrant2
             // 
@@ -115,7 +113,7 @@ namespace PemiraServer
             this.buttonGrant2.TabIndex = 5;
             this.buttonGrant2.Text = "Grant Access";
             this.buttonGrant2.UseVisualStyleBackColor = true;
-            this.buttonGrant2.Click += new System.EventHandler(this.buttonGrant_Click);
+            this.buttonGrant2.Click += new System.EventHandler(this.buttonGrant2_Click);
             // 
             // label1
             // 
@@ -150,9 +148,9 @@ namespace PemiraServer
             // panel1
             // 
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel1.Controls.Add(this.listViewBilik1);
             this.panel1.Controls.Add(this.labelTimerBilik1);
             this.panel1.Controls.Add(this.labelBilikNIM2);
+            this.panel1.Controls.Add(this.labelBilikNIM1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.buttonGrant1);
             this.panel1.Location = new System.Drawing.Point(261, 168);
@@ -160,23 +158,11 @@ namespace PemiraServer
             this.panel1.Size = new System.Drawing.Size(232, 253);
             this.panel1.TabIndex = 9;
             // 
-            // listViewBilik1
-            // 
-            this.listViewBilik1.BackColor = System.Drawing.SystemColors.Control;
-            this.listViewBilik1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listViewBilik1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewBilik1.Location = new System.Drawing.Point(29, 91);
-            this.listViewBilik1.Name = "listViewBilik1";
-            this.listViewBilik1.Size = new System.Drawing.Size(126, 90);
-            this.listViewBilik1.TabIndex = 12;
-            this.listViewBilik1.UseCompatibleStateImageBehavior = false;
-            this.listViewBilik1.View = System.Windows.Forms.View.Details;
-            // 
             // labelTimerBilik1
             // 
             this.labelTimerBilik1.AutoSize = true;
             this.labelTimerBilik1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimerBilik1.Location = new System.Drawing.Point(182, 91);
+            this.labelTimerBilik1.Location = new System.Drawing.Point(152, 91);
             this.labelTimerBilik1.Name = "labelTimerBilik1";
             this.labelTimerBilik1.Size = new System.Drawing.Size(27, 20);
             this.labelTimerBilik1.TabIndex = 9;
@@ -192,39 +178,58 @@ namespace PemiraServer
             this.labelBilikNIM2.TabIndex = 8;
             this.labelBilikNIM2.Text = "NIM 2";
             // 
+            // labelBilikNIM1
+            // 
+            this.labelBilikNIM1.AutoSize = true;
+            this.labelBilikNIM1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBilikNIM1.Location = new System.Drawing.Point(25, 91);
+            this.labelBilikNIM1.Name = "labelBilikNIM1";
+            this.labelBilikNIM1.Size = new System.Drawing.Size(60, 20);
+            this.labelBilikNIM1.TabIndex = 7;
+            this.labelBilikNIM1.Text = "1NIM 1";
+            // 
             // panel2
             // 
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panel2.Controls.Add(this.listViewBilik2);
             this.panel2.Controls.Add(this.label2);
             this.panel2.Controls.Add(this.labelTimerBilik2);
+            this.panel2.Controls.Add(this.label10);
             this.panel2.Controls.Add(this.buttonGrant2);
+            this.panel2.Controls.Add(this.label11);
             this.panel2.Location = new System.Drawing.Point(499, 168);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(232, 253);
             this.panel2.TabIndex = 10;
             // 
-            // listViewBilik2
-            // 
-            this.listViewBilik2.BackColor = System.Drawing.SystemColors.Control;
-            this.listViewBilik2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listViewBilik2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listViewBilik2.Location = new System.Drawing.Point(27, 91);
-            this.listViewBilik2.Name = "listViewBilik2";
-            this.listViewBilik2.Size = new System.Drawing.Size(126, 90);
-            this.listViewBilik2.TabIndex = 13;
-            this.listViewBilik2.UseCompatibleStateImageBehavior = false;
-            this.listViewBilik2.View = System.Windows.Forms.View.Details;
-            // 
             // labelTimerBilik2
             // 
             this.labelTimerBilik2.AutoSize = true;
             this.labelTimerBilik2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTimerBilik2.Location = new System.Drawing.Point(179, 91);
+            this.labelTimerBilik2.Location = new System.Drawing.Point(149, 91);
             this.labelTimerBilik2.Name = "labelTimerBilik2";
             this.labelTimerBilik2.Size = new System.Drawing.Size(27, 20);
             this.labelTimerBilik2.TabIndex = 13;
             this.labelTimerBilik2.Text = "10";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(22, 123);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(51, 20);
+            this.label10.TabIndex = 12;
+            this.label10.Text = "NIM 2";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(22, 91);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(51, 20);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "NIM 1";
             // 
             // panel3
             // 
@@ -287,25 +292,6 @@ namespace PemiraServer
 
         #endregion
 
-        private void InitializeListView() {
-            ColumnHeader header = new ColumnHeader();
-            header.Text = "";
-            header.Name = "dummy";
-            header.Width = listViewWaiting.Width - 25;
-
-            listViewWaiting.Columns.Add(header);
-
-            ColumnHeader headerBilik = header.Clone() as ColumnHeader;
-            headerBilik.Width = listViewBilik1.Width - 25;
-            listViewBilik1.Columns.Add(headerBilik);
-            listViewBilik2.Columns.Add(headerBilik.Clone() as ColumnHeader);
-
-            listViewWaiting.HeaderStyle = ColumnHeaderStyle.None;
-            listViewBilik1.HeaderStyle = ColumnHeaderStyle.None;
-            listViewBilik2.HeaderStyle = ColumnHeaderStyle.None;
-        }
-
-
         private System.Windows.Forms.Label labelNIM;
         private System.Windows.Forms.TextBox textBoxNIM;
         private System.Windows.Forms.Button buttonSubmitNIM;
@@ -320,7 +306,10 @@ namespace PemiraServer
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label labelTimerBilik1;
         private System.Windows.Forms.Label labelBilikNIM2;
+        private System.Windows.Forms.Label labelBilikNIM1;
         private System.Windows.Forms.Label labelTimerBilik2;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.ListView listViewWaiting;
         private System.Windows.Forms.ListView listViewBilik1;
         private System.Windows.Forms.ListView listViewBilik2;
