@@ -16,10 +16,14 @@ namespace PemiraServer
         private TimerCountdown time2;
         private string tag1 = "1";
         private string tag2 = "2";
+        private bool[] isTwice;
+        private const int MAXWAITING = 2;
 
         public MainForm()
         {
+            isTwice = new bool[2];
             InitializeComponent();
+            InitializeListView();
             time1 = new TimerCountdown(tag1);
             time1.Tick += new EventHandler(time_Tick);
 
@@ -27,41 +31,53 @@ namespace PemiraServer
             time2.Tick += new EventHandler(time_Tick);
 
 
-            ColumnHeader header = new ColumnHeader();
-            header.Text = "";
-            header.Name = "dummy";
-            header.Width = listViewWaiting.Width - 25;
-            listViewWaiting.Columns.Add(header);
-            listViewWaiting.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-
-
+            
         }
+
+
 
         private void time_Tick(object sender, EventArgs e)
         {
             TimerCountdown t = sender as TimerCountdown;
-            t.counter--;
-
-            if (t.counter <= 0 && t.isSarjana) {//kasus dia milih K3M
-                t.counter = t.MAXCOUNT;
-                MessageBox.Show("heh");
-            }
-
+            Label lTimer;
+            Button bGrant;
+            ListView listNIM;
+            int idx;
             if (t.Tag.ToString() == tag1) {
-                labelTimerBilik1.Text = t.counter.ToString();
-            } else if (t.Tag.ToString() == tag2) {
-                labelTimerBilik2.Text = t.counter.ToString();
+                lTimer = labelTimerBilik1;
+                idx = 0;
+                bGrant = buttonGrant1;
+                listNIM = listViewBilik1;
+            } else {
+                idx = 1;
+                bGrant = buttonGrant1;
+                lTimer = labelTimerBilik2;
+                listNIM = listViewBilik2;
             }
 
-            if (t.counter > 0) {
-                
-            } else { 
-                t.Stop();
+
+            t.counter--;
+            int count = t.counter;
+            lTimer.Text = count.ToString();
+
+            if (count < 0 && isTwice[idx]) {
                 t.counter = t.MAXCOUNT;
-                if (t.Tag.ToString() == tag1) {
-                    buttonGrant1.Enabled = true;
-                } else if (t.Tag.ToString() == tag2) {
-                    buttonGrant1.Enabled = true;
+                count = t.counter;
+                isTwice[idx] = false;
+            }
+
+            if (count < 0) { //stop
+                bGrant.Enabled = true;
+                t.counter = t.MAXCOUNT;
+                t.Stop();
+
+                lTimer.Text = t.MAXCOUNT.ToString();
+
+                listNIM.Items.RemoveAt(0);
+                if (listViewWaiting.Items.Count > 0) {
+                    string s = listViewWaiting.Items[0].Text;
+                    listNIM.Items.Add(s);
+                    listViewWaiting.Items.RemoveAt(0);
                 }
             }
         }
@@ -71,8 +87,23 @@ namespace PemiraServer
             string s = textBoxNIM.Text;
 
             if (s != "") {
-                listViewWaiting.Items.Add(s);
-
+                int countBilik1 = listViewBilik1.Items.Count;
+                int countBilik2 = listViewBilik2.Items.Count;
+                if (countBilik2 < MAXWAITING) {
+                    if (countBilik1 == 0) {
+                        listViewBilik1.Items.Add(s);
+                    } else {
+                        listViewBilik2.Items.Add(s);
+                    }
+                } else if (countBilik1 < MAXWAITING) {
+                    if (countBilik2 == 0) {
+                        listViewBilik2.Items.Add(s);
+                    } else {
+                        listViewBilik1.Items.Add(s);
+                    }
+                } else {
+                    listViewWaiting.Items.Add(s);
+                }
             }
             textBoxNIM.Text = "";
         }
@@ -90,20 +121,30 @@ namespace PemiraServer
             }
         }
 
-        private void buttonGrant1_Click(object sender, EventArgs e)
+        private void buttonGrant_Click(object sender, EventArgs e)
         {
-            time1.Start();
-            time1.isSarjana = labelBilikNIM1.Text[0] == '1';
-            
-            if (time1.isSarjana) {
-                MessageBox.Show("hello");
+            Button source = sender as Button;
+            TimerCountdown t;
+            ListView listNIM;
+            int idx;
+            if (source.Name == "buttonGrant1") {
+                t = time1;
+                listNIM = listViewBilik1;
+                idx = 0;
+            } else {
+                t = time2;
+                listNIM = listViewBilik2;
+                idx = 1;
             }
-            buttonGrant1.Enabled = false;
-        }
 
-        private void buttonGrant2_Click(object sender, EventArgs e)
-        {
-            time2.Start();
+            if (listNIM.Items.Count > 0) { //sukses
+                isTwice[idx] = listNIM.Items[0].Text[0] == '1';
+                source.Enabled = false;
+                t.Start();
+            } else { //gagal
+                MessageBox.Show("Tidak ada NIM pada antrian!");
+            }
+            
         }
     }
 }
