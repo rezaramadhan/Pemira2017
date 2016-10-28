@@ -28,6 +28,7 @@ namespace PemiraServer
 
         public void disconnect() {
             netStream.Close(1);
+            
             //client.Close();
         }
 
@@ -38,12 +39,13 @@ namespace PemiraServer
         }
 
         public string recv() {
-            byte[] inStream = new byte[MAXBUFF];
-
-            netStream.Read(inStream, 0, client.ReceiveBufferSize);
             string s = "";
-            s = Encoding.ASCII.GetString(inStream);
+            if (client.Connected) {
+                byte[] inStream = new byte[MAXBUFF];
 
+                netStream.Read(inStream, 0, client.ReceiveBufferSize);
+                s = Encoding.ASCII.GetString(inStream);
+            }
             return s;
         }
     }

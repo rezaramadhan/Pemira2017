@@ -6,7 +6,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace PemiraServer
 {
@@ -45,8 +47,7 @@ namespace PemiraServer
                 sock[i] = new ServerSocket(host[i], port);
             }
         }
-
-       
+        
 
         /*
             Function to add the content of textBoxNIM to waiting list            
@@ -77,6 +78,22 @@ namespace PemiraServer
             textBoxNIM.Text = "";
         }
 
+        private void TCPrecv(Object i) {
+            int idx = (int) i ;
+            string s = "aa";
+            while (s != "") {
+                try {
+                    s = sock[idx].recv();
+                    if (s != "({ok})") {
+                        time[idx].Stop();
+                        //labelTimerBilik1.Text = "10";
+                    }
+                } catch (IOException e) {
+                    s = "";
+                }
+            }
+        }
+
         /*
             Event handler when button submit clicked             
         */
@@ -95,7 +112,7 @@ namespace PemiraServer
                 addToWaiting();
             }
         }
-
+        
         /*
             Event handler when a buttonGrant is clicked             
         */
@@ -119,6 +136,8 @@ namespace PemiraServer
                 source.Enabled = false;
                 time[idx].Start();
                 sock[idx].connect();
+                Thread trd = new Thread(TCPrecv);
+                trd.Start(idx);
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
