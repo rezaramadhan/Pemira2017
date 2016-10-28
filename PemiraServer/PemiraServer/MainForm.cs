@@ -85,7 +85,7 @@ namespace PemiraServer
                 try {
                     s = sock[idx].recv();
                     if (s != "({ok})") {
-                        time[idx].Stop();
+                        //time[idx].Stop();
                         //labelTimerBilik1.Text = "10";
                     }
                 } catch (IOException e) {

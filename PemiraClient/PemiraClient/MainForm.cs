@@ -154,11 +154,7 @@ namespace PemiraClient
 
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
-
-<<<<<<< HEAD
-                   
-=======
-                    int i;
+                   int i;
 
                     // Loop to receive all the data sent by the client.
                     i = stream.Read(bytes, 0, bytes.Length);
@@ -183,8 +179,6 @@ namespace PemiraClient
                             i = 0;
                         }
                     }
->>>>>>> 6904e86e240ed05759f3a6af97ff32ee76e55551
-
                     // Shutdown and end connection
                     client.Close();
                     Console.WriteLine("Close Liau");
@@ -239,7 +233,7 @@ namespace PemiraClient
                     byte[] bytesFrom = new byte[20];
                     networkStream.Read(bytesFrom, 0, 20);
                     string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+                    //dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
 
                     string serverResponse = "Received!";
                     Byte[] sendBytes = Encoding.ASCII.GetBytes(serverResponse);
@@ -259,6 +253,7 @@ namespace PemiraClient
 
             }
         }
+
         public MainForm()
         {
             InitializeComponent();
