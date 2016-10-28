@@ -31,7 +31,7 @@ namespace PemiraServer
         }
 
         /*
-            Initialize all data member in this class            
+            Initialize all data members in this class            
         */
         private void InitializeVariable() {
             isTwice = new bool[MAXWAITING];
@@ -118,8 +118,7 @@ namespace PemiraServer
                 isTwice[idx] = listNIM.Items[0].Text[0] == '1';
                 source.Enabled = false;
                 time[idx].Start();
-
-               sock[idx].connect();
+                sock[idx].connect();
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
@@ -135,6 +134,7 @@ namespace PemiraServer
             Button bGrant;
             ListView listNIM;
             int idx;
+            string data;
 
             if (t.Tag.ToString() == tag[0]) {
                 lTimer = labelTimerBilik1;
@@ -153,8 +153,6 @@ namespace PemiraServer
             int count = t.counter;
             lTimer.Text = count.ToString();
 
-            //sock[i].send();
-
             // Check if should choose K3M
             if (count <= 0 && isTwice[idx]) {
                 t.counter = t.MAXCOUNT;
@@ -171,8 +169,8 @@ namespace PemiraServer
                 lTimer.Text = t.MAXCOUNT.ToString();
 
                 listNIM.Items.RemoveAt(0);
-
-                //sock[idx].disconnect();
+                sock[idx].send("({timeout})");
+                sock[idx].disconnect();
 
                 // Add from listWaiting to bilik
                 if (listViewWaiting.Items.Count > 0) {
@@ -180,6 +178,9 @@ namespace PemiraServer
                     listNIM.Items.Add(s);
                     listViewWaiting.Items.RemoveAt(0);
                 }
+            } else {
+                data = "({" + count.ToString() + "})";
+                sock[idx].send(data);
             }
         }
 

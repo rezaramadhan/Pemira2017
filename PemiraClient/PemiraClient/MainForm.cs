@@ -14,6 +14,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Net.Sockets;
 using System.Net;
+using System.IO;
 
 namespace PemiraClient
 {
@@ -121,18 +122,20 @@ namespace PemiraClient
         /***===================================================================================***/
         public static string data = null;
 
-        public static void StartListening()
+        public void StartListening()
         {
+            Console.WriteLine("starting...");
             try
             {
+
                 // set the TcpListener on port 13000
+                
                 int port = 13514;
                 TcpListener server = new TcpListener(IPAddress.Any, port);
 
                 // Start listening for client requests
                 server.Start();
                 Console.WriteLine("Start Liau..");
-
                 // Buffer for reading data
                 byte[] bytes = new byte[1024];
                 string data;
@@ -169,9 +172,11 @@ namespace PemiraClient
                         // Send back a response.
                         stream.Write(msg, 0, msg.Length);
                         Console.WriteLine(String.Format("Sent: {0}", data));
-
-                        i = stream.Read(bytes, 0, bytes.Length);
-
+                        try {
+                            i = stream.Read(bytes, 0, bytes.Length);
+                        } catch (IOException e) {
+                            i = 0;
+                        }
                     }
 
                     // Shutdown and end connection
@@ -182,7 +187,7 @@ namespace PemiraClient
             catch (SocketException e)
             {
                 Console.WriteLine("SocketException: {0}", e);
-            }
+            } 
 
 
             Console.WriteLine("Hit enter to continue...");

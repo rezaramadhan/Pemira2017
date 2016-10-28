@@ -16,17 +16,19 @@ namespace PemiraServer
         public ServerSocket(string h, int p) {
             host = h;
             port = p;
-            client = new TcpClient();
         }
 
         public void connect() {
+
+            client = new TcpClient();
             client.Connect(host, port);
             netStream = client.GetStream();
             client.ReceiveBufferSize = MAXBUFF;
         }
 
         public void disconnect() {
-            client.Close();
+            netStream.Close(1);
+            //client.Close();
         }
 
         public void send(string s) {
