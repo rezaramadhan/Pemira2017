@@ -28,28 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelSelamatDatang = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.labelNIM = new System.Windows.Forms.Label();
-            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelSelamatDatang = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // labelSelamatDatang
-            // 
-            this.labelSelamatDatang.BackColor = System.Drawing.Color.Transparent;
-            this.labelSelamatDatang.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelSelamatDatang.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelSelamatDatang.ForeColor = System.Drawing.Color.Snow;
-            this.labelSelamatDatang.Location = new System.Drawing.Point(0, 0);
-            this.labelSelamatDatang.Name = "labelSelamatDatang";
-            this.labelSelamatDatang.Size = new System.Drawing.Size(457, 63);
-            this.labelSelamatDatang.TabIndex = 0;
-            this.labelSelamatDatang.Text = "Selamat Datang !";
-            this.labelSelamatDatang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.labelSelamatDatang.UseMnemonic = false;
             // 
             // panel1
             // 
@@ -84,21 +69,25 @@
             this.labelNIM.Text = "Hubungi operator untuk memilih";
             this.labelNIM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelStatus
+            // labelSelamatDatang
             // 
-            this.labelStatus.AutoSize = true;
-            this.labelStatus.Location = new System.Drawing.Point(402, 234);
-            this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(35, 13);
-            this.labelStatus.TabIndex = 3;
-            this.labelStatus.Text = "label1";
+            this.labelSelamatDatang.BackColor = System.Drawing.Color.Transparent;
+            this.labelSelamatDatang.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelSelamatDatang.Font = new System.Drawing.Font("Microsoft Sans Serif", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelSelamatDatang.ForeColor = System.Drawing.Color.Snow;
+            this.labelSelamatDatang.Location = new System.Drawing.Point(0, 0);
+            this.labelSelamatDatang.Name = "labelSelamatDatang";
+            this.labelSelamatDatang.Size = new System.Drawing.Size(457, 63);
+            this.labelSelamatDatang.TabIndex = 0;
+            this.labelSelamatDatang.Text = "Selamat Datang !";
+            this.labelSelamatDatang.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelSelamatDatang.UseMnemonic = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(808, 326);
-            this.Controls.Add(this.labelStatus);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "MainForm";
@@ -108,17 +97,14 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label labelSelamatDatang;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label labelNIM;
-        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelSelamatDatang;
     }
 }
 

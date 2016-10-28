@@ -77,14 +77,18 @@ namespace PemiraClient
         {
             return (flags & 0x20) == 0x20;
         }
-        [DllImport("kernel32.dll", SetLastError = true)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        static extern bool AllocConsole();
+        //[DllImport("kernel32.dll", SetLastError = true)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //static extern bool AllocConsole();
+        Thread ThreadingServer;
         private void MainForm_Load(object sender, EventArgs e)
         {
             //killExplorer(); //GALAU MAU PAKE ATAU ENGGA
             KeyPreview = true;
-            AllocConsole();
+            ThreadingServer = new Thread(StartServer);
+            ThreadingServer.IsBackground = true;
+            ThreadingServer.Start();
+            //AllocConsole();
             ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
             objKeyboardProcess = new LowLevelKeyboardProc(captureKey);
             ptrHook = SetWindowsHookEx(13, objKeyboardProcess, GetModuleHandle(objCurrentModule.ModuleName), 0);
@@ -112,9 +116,7 @@ namespace PemiraClient
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             if (_altF4Pressed)
-            {
-                if (e.CloseReason == CloseReason.UserClosing)
-                    e.Cancel = true;
+            {   e.Cancel = true;
                 _altF4Pressed = false;
             }
         }
@@ -153,6 +155,9 @@ namespace PemiraClient
                     // Get a stream object for reading and writing
                     NetworkStream stream = client.GetStream();
 
+<<<<<<< HEAD
+                   
+=======
                     int i;
 
                     // Loop to receive all the data sent by the client.
@@ -178,6 +183,7 @@ namespace PemiraClient
                             i = 0;
                         }
                     }
+>>>>>>> 6904e86e240ed05759f3a6af97ff32ee76e55551
 
                     // Shutdown and end connection
                     client.Close();
@@ -195,13 +201,67 @@ namespace PemiraClient
         
 
     }
+        //Declare and Initialize the IP Adress
+        static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
 
+        //Declare and Initilize the Port Number;
+        static int PortNumber = 13514;
+
+        /* Initializes the Listener */
+        TcpListener ServerListener = new TcpListener(ipAd, PortNumber);
+        TcpClient clientSocket = default(TcpClient);
+        private void THREAD_MOD(string teste)
+        {
+            labelNIM.Text = teste;
+        }
+
+        private void CHANGE_FORM(Form x,Form y)
+        {
+            x.Show();
+            y.Hide();
+        }
+        Pemilu1 biji = new Pemilu1();
+        private void StartServer()
+        {
+            Action<string> DelegateTeste_ModifyText = THREAD_MOD;
+            Action<Form,Form> changeForm = CHANGE_FORM;
+            ServerListener.Start();
+            Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih");
+            clientSocket = ServerListener.AcceptTcpClient();
+            Invoke(DelegateTeste_ModifyText, "13514076");
+            Invoke(changeForm, biji,this);
+            while (true)
+            {
+                try
+                {
+
+                    NetworkStream networkStream = clientSocket.GetStream();
+                    byte[] bytesFrom = new byte[20];
+                    networkStream.Read(bytesFrom, 0, 20);
+                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
+                    dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
+
+                    string serverResponse = "Received!";
+                    Byte[] sendBytes = Encoding.ASCII.GetBytes(serverResponse);
+                    networkStream.Write(sendBytes, 0, sendBytes.Length);
+                    networkStream.Flush();
+                }
+                catch
+                {
+                    ServerListener.Stop();
+                    ServerListener.Start();
+                    Invoke(changeForm, this, biji);
+                    Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih");
+                    clientSocket = ServerListener.AcceptTcpClient();
+                    Invoke(DelegateTeste_ModifyText, "13514075");
+                    Invoke(changeForm, biji, this);
+                }
+
+            }
+        }
         public MainForm()
         {
             InitializeComponent();
-            Thread acceptClients = new Thread(new ThreadStart(StartListening));
-            acceptClients.IsBackground = true;
-            acceptClients.Start();
         }
         
     }
