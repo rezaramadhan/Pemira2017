@@ -119,7 +119,7 @@ namespace PemiraServer
                 source.Enabled = false;
                 time[idx].Start();
 
-               //sock[idx].connect();
+               sock[idx].connect();
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
