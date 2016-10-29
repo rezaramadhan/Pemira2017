@@ -33,6 +33,7 @@ namespace PemiraServer
         }
 
         public void send(string s) {
+            Debug.WriteLine("Send: " + s);
             byte[] outStream = Encoding.ASCII.GetBytes(s);
             netStream.Write(outStream, 0, outStream.Length);
 
@@ -46,7 +47,8 @@ namespace PemiraServer
                 int bytesRead = netStream.Read(inStream, 0, client.ReceiveBufferSize);
                 s = Encoding.ASCII.GetString(inStream, 0, bytesRead);
             }
-            Debug.WriteLine(s.Length);
+            //            Debug.WriteLine(s.Length);
+            Debug.WriteLine("Recv: " + s);
             return s;
         }
     }

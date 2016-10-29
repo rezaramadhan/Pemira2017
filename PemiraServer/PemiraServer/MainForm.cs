@@ -19,7 +19,7 @@ namespace PemiraServer
         private string[] tag = { "1" , "2" };
         private bool[] isTwice;
         private const int MAXWAITING = 2;
-        private string[] host = { "127.0.0.1", "127.0.0.1" };
+        private string[] host = { "192.168.43.90", "127.0.0.1" };
         private int port = 13514;
       
         /*
@@ -141,12 +141,12 @@ namespace PemiraServer
             while (s != "") {
                 try {
                     s = sock[idx].recv();
-                    Debug.WriteLine(s);
+                    //Debug.WriteLine("recieved" + s);
                     string[] listArg = s.Split(',');
                     if (listArg[0] == "K3M" || listArg[0] == "MWA") {
                         Invoke(Delegate_AcceptVote, listArg, idx);
                     } else if (listArg[0] == "ready") {
-                        Debug.WriteLine("READY");
+                        //Debug.WriteLine("READY");
                         Invoke(Delegate_StartVote, idx);
                     }
                 } catch (IOException e) {
@@ -242,22 +242,24 @@ namespace PemiraServer
             lTimer.Text = count.ToString();
 
             // Check if should choose K3M
-            if (count <= 0 && isTwice[idx]) {
-                t.counter = TimerCountdown.MAXCOUNT;
-                count = t.counter;
-                isTwice[idx] = false;
-            }
+            
 
             // Timer's empty, stop
-            if (count < 0) {
-               
-                sock[idx].send("({timeout})");
-                sock[idx].disconnect();
+            if (count <= 0) {
+                if (isTwice[idx]) {
+                    t.counter = TimerCountdown.MAXCOUNT;
+                    sock[idx].send("({timeout})");
+                    count = t.counter;
+                    isTwice[idx] = false;
+                    t.Stop();
+                    t.reset();
+                } else {
+                    sock[idx].send("({timeout})");
+                    sock[idx].disconnect();
+                    //tandain NIM x udah vote di database
 
-                //tandain NIM x udah vote di database
-
-                STOP_VOTE(listNIM, bGrant, t, lTimer);
-                
+                    STOP_VOTE(listNIM, bGrant, t, lTimer);
+                }
             } else {
                 data = "({" + count.ToString() + "})";
                 sock[idx].send(data);
