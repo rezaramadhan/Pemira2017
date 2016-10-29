@@ -15,6 +15,7 @@ using System.Threading;
 using System.Net.Sockets;
 using System.Net;
 using System.IO;
+using Microsoft.VisualBasic;
 
 namespace PemiraClient
 {
@@ -85,6 +86,11 @@ namespace PemiraClient
         {
             //killExplorer(); //GALAU MAU PAKE ATAU ENGGA
             KeyPreview = true;
+            ControlBox = false;
+            MinimizeBox = false;
+            MaximizeBox = false;
+            StartPosition = FormStartPosition.CenterScreen;
+            
             ThreadingServer = new Thread(StartServer);
             ThreadingServer.IsBackground = true;
             ThreadingServer.Start();
@@ -112,6 +118,24 @@ namespace PemiraClient
             {
                 _altF4Pressed = true;
             }
+            else if ((e.Alt && e.Shift && e.Control && e.KeyCode == Keys.P ))
+            {
+                DialogPassword password = new DialogPassword();
+                password.StartPosition = FormStartPosition.CenterScreen;
+                password.ShowDialog();
+                if (password.inputPassword != "ajdlfjghjashdkjfdfkjlsgajsd")
+                {
+                    if (password.inputPassword == "inipassword")
+                    {
+                        Application.Exit();
+                    }
+                    else
+                    {
+                            MessageBox.Show("Password salah !");
+                        }
+                }
+                password.Dispose();
+            }
         }
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -121,90 +145,15 @@ namespace PemiraClient
             }
         }
 
-        /***===================================================================================***/
-        public static string data = null;
-
-        public void StartListening()
-        {
-            Console.WriteLine("starting...");
-            try
-            {
-
-                // set the TcpListener on port 13000
-                
-                int port = 13514;
-                TcpListener server = new TcpListener(IPAddress.Any, port);
-
-                // Start listening for client requests
-                server.Start();
-                Console.WriteLine("Start Liau..");
-                // Buffer for reading data
-                byte[] bytes = new byte[1024];
-                string data;
-
-                //Enter the listening loop
-                while (true)
-                {
-                    Console.Write("Waiting for a connection... ");
-
-                    // Perform a blocking call to accept requests.
-                    // You could also user server.AcceptSocket() here.
-                    TcpClient client = server.AcceptTcpClient();
-                    Console.WriteLine("Connected!");
-
-                    // Get a stream object for reading and writing
-                    NetworkStream stream = client.GetStream();
-                   int i;
-
-                    // Loop to receive all the data sent by the client.
-                    i = stream.Read(bytes, 0, bytes.Length);
-
-                    while (i != 0)
-                    {
-                        // Translate data bytes to a ASCII string.
-                        data = System.Text.Encoding.ASCII.GetString(bytes, 0, i);
-                        Console.WriteLine(String.Format("Received: {0}", data));
-
-                        // Process the data sent by the client.
-                        data = data.ToUpper();
-
-                        byte[] msg = System.Text.Encoding.ASCII.GetBytes(data);
-
-                        // Send back a response.
-                        stream.Write(msg, 0, msg.Length);
-                        Console.WriteLine(String.Format("Sent: {0}", data));
-                        try {
-                            i = stream.Read(bytes, 0, bytes.Length);
-                        } catch (IOException e) {
-                            i = 0;
-                        }
-                    }
-                    // Shutdown and end connection
-                    client.Close();
-                    Console.WriteLine("Close Liau");
-                }
-            }
-            catch (SocketException e)
-            {
-                Console.WriteLine("SocketException: {0}", e);
-            } 
-
-
-            Console.WriteLine("Hit enter to continue...");
-            Console.Read();
-        
-
-    }
         //Declare and Initialize the IP Adress
-        static IPAddress ipAd = IPAddress.Parse("192.168.43.90");
-        //static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+        //static IPAddress ipAd = IPAddress.Parse("192.168.43.90");
+        static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
         //static IPAddress ipAd = IPAddress.Parse("167.205.66.210");
-
         //Declare and Initilize the Port Number;
         static int PortNumber = 13514;
 
         /* Initializes the Listener */
-        TcpListener ServerListener = new TcpListener(ipAd, PortNumber);
+        TcpListener ServerListener = new TcpListener(IPAddress.Any, PortNumber);
         TcpClient clientSocket = default(TcpClient);
         private void THREAD_MOD(string teste, Label x)
         {
@@ -226,8 +175,8 @@ namespace PemiraClient
             Invoke(changeGB, GBWelcomeScreen );
             ServerListener.Start();
             Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih",labelNIM);
-            Invoke(DelegateTeste_ModifyText, "timer", labelTimer);
-            Invoke(DelegateTeste_ModifyText, "timer", labelTimer2);
+            Invoke(DelegateTeste_ModifyText, "", labelTimer);
+            Invoke(DelegateTeste_ModifyText, "", labelTimer2);
             clientSocket = ServerListener.AcceptTcpClient();
             NetworkStream networkStream1 = clientSocket.GetStream();
             byte[] bytesFromawal = new byte[20];
@@ -343,7 +292,9 @@ namespace PemiraClient
                     ServerListener.Stop();
                     Invoke(changeGB, GBWelcomeScreen);
                     ServerListener.Start();
-                    Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih",labelNIM);
+                    Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih", labelNIM);
+                    Invoke(DelegateTeste_ModifyText, "", labelTimer);
+                    Invoke(DelegateTeste_ModifyText, "", labelTimer2);
                     clientSocket = ServerListener.AcceptTcpClient();
                     networkStream1 = clientSocket.GetStream();
                     byte[] bytesFromawalx = new byte[20];
