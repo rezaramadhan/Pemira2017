@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
-
+using System.Diagnostics;
 namespace PemiraServer
 {
     public partial class MainForm : Form
@@ -21,7 +21,7 @@ namespace PemiraServer
         private const int MAXWAITING = 2;
         private string[] host = { "127.0.0.1", "127.0.0.1" };
         private int port = 13514;
-
+      
         /*
             Constructors             
         */
@@ -48,7 +48,7 @@ namespace PemiraServer
             }
         }
         
-
+     
         /*
             Function to add the content of textBoxNIM to waiting list            
         */
@@ -78,15 +78,76 @@ namespace PemiraServer
             textBoxNIM.Text = "";
         }
 
+        private void STOP_VOTE(ListView listNIM, Button bGrant, TimerCountdown t, Label lTimer) {
+
+            
+            listNIM.Items.RemoveAt(0);
+            // Add from listWaiting to bilik
+            if (listViewWaiting.Items.Count > 0) {
+                string s = listViewWaiting.Items[0].Text;
+                listNIM.Items.Add(s);
+                listViewWaiting.Items.RemoveAt(0);
+            }
+
+            bGrant.Enabled = true;
+            t.Stop();
+            t.reset();
+
+            lTimer.Text = TimerCountdown.MAXCOUNT.ToString();
+        }
+
+        private void ACCEPT_VOTE(string[] args, int i) {
+            //masukin pilihan ke database, masukin juga bahwa NIM x udah milih
+
+            //ubah label waktu
+            ListView listNIM;
+            Button bGrant;
+            Label lTimer;
+            if (i == 0) {
+                bGrant = buttonGrant1;
+                lTimer = labelTimerBilik1;
+                listNIM = listViewBilik1;
+                labelTimerBilik1.Text = TimerCountdown.MAXCOUNT.ToString();
+            } else {
+                bGrant = buttonGrant2;
+                lTimer = labelTimerBilik2;
+                listNIM = listViewBilik2;
+                labelTimerBilik2.Text = TimerCountdown.MAXCOUNT.ToString();    
+            }
+
+            
+            if(!isTwice[i]) { //stop proses buat NIM x
+                sock[i].disconnect();
+                STOP_VOTE(listNIM, bGrant, time[i], lTimer);
+            } else {
+                //stop timer
+                time[i].Stop();
+                time[i].reset();
+            }
+        }
+
+        private void START_VOTE(int i) {
+            //start timer
+            time[i].Start();
+            isTwice[i] = false;
+        }
+
         private void TCPrecv(Object i) {
             int idx = (int) i ;
+            Action<string[], int> Delegate_AcceptVote = ACCEPT_VOTE;
+            Action<int> Delegate_StartVote = START_VOTE;
+
             string s = "aa";
             while (s != "") {
                 try {
                     s = sock[idx].recv();
-                    if (s != "({ok})") {
-                        //time[idx].Stop();
-                        //labelTimerBilik1.Text = "10";
+                    Debug.WriteLine(s);
+                    string[] listArg = s.Split(',');
+                    if (listArg[0] == "K3M" || listArg[0] == "MWA") {
+                        Invoke(Delegate_AcceptVote, listArg, idx);
+                    } else if (listArg[0] == "ready") {
+                        Debug.WriteLine("READY");
+                        Invoke(Delegate_StartVote, idx);
                     }
                 } catch (IOException e) {
                     s = "";
@@ -119,7 +180,6 @@ namespace PemiraServer
         private void buttonGrant_Click(object sender, EventArgs e)
         {
             Button source = sender as Button;
-            TimerCountdown t;
             ListView listNIM;
 
             int idx;
@@ -138,6 +198,15 @@ namespace PemiraServer
                 sock[idx].connect();
                 Thread trd = new Thread(TCPrecv);
                 trd.Start(idx);
+
+                string NIM = listNIM.Items[0].Text;
+                string data;
+                if (isTwice[idx]) {
+                    data = NIM + ",y";
+                } else {
+                    data = NIM + ",n";
+                }
+                sock[idx].send(data);
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
@@ -174,29 +243,21 @@ namespace PemiraServer
 
             // Check if should choose K3M
             if (count <= 0 && isTwice[idx]) {
-                t.counter = t.MAXCOUNT;
+                t.counter = TimerCountdown.MAXCOUNT;
                 count = t.counter;
                 isTwice[idx] = false;
             }
 
             // Timer's empty, stop
             if (count < 0) {
-                bGrant.Enabled = true;
-                t.counter = t.MAXCOUNT;
-                t.Stop();
-
-                lTimer.Text = t.MAXCOUNT.ToString();
-
-                listNIM.Items.RemoveAt(0);
+               
                 sock[idx].send("({timeout})");
                 sock[idx].disconnect();
 
-                // Add from listWaiting to bilik
-                if (listViewWaiting.Items.Count > 0) {
-                    string s = listViewWaiting.Items[0].Text;
-                    listNIM.Items.Add(s);
-                    listViewWaiting.Items.RemoveAt(0);
-                }
+                //tandain NIM x udah vote di database
+
+                STOP_VOTE(listNIM, bGrant, t, lTimer);
+                
             } else {
                 data = "({" + count.ToString() + "})";
                 sock[idx].send(data);

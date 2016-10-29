@@ -10,14 +10,17 @@ namespace PemiraServer
     class TimerCountdown : Timer
     {
         private int jarak = 1000;
-        public int MAXCOUNT = 10;
-        public Boolean isSarjana = true;
+        public static int MAXCOUNT = 10;
         public int counter;
 
         public TimerCountdown(string s)
         {
             this.Tag = s;
             this.Interval = jarak;
+            counter = MAXCOUNT;
+        }
+
+        public void reset() {
             counter = MAXCOUNT;
         }
     }

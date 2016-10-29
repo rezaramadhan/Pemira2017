@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
-
+using System.Diagnostics;
 namespace PemiraServer
 {
     class ServerSocket {
@@ -29,7 +29,7 @@ namespace PemiraServer
         public void disconnect() {
             netStream.Close(1);
             
-            //client.Close();
+            client.Close();
         }
 
         public void send(string s) {
@@ -43,9 +43,10 @@ namespace PemiraServer
             if (client.Connected) {
                 byte[] inStream = new byte[MAXBUFF];
 
-                netStream.Read(inStream, 0, client.ReceiveBufferSize);
-                s = Encoding.ASCII.GetString(inStream);
+                int bytesRead = netStream.Read(inStream, 0, client.ReceiveBufferSize);
+                s = Encoding.ASCII.GetString(inStream, 0, bytesRead);
             }
+            Debug.WriteLine(s.Length);
             return s;
         }
     }
