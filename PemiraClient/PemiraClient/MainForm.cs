@@ -196,7 +196,9 @@ namespace PemiraClient
 
     }
         //Declare and Initialize the IP Adress
-        static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+        static IPAddress ipAd = IPAddress.Parse("192.168.43.90");
+        //static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+        //static IPAddress ipAd = IPAddress.Parse("167.205.66.210");
 
         //Declare and Initilize the Port Number;
         static int PortNumber = 13514;
@@ -204,26 +206,38 @@ namespace PemiraClient
         /* Initializes the Listener */
         TcpListener ServerListener = new TcpListener(ipAd, PortNumber);
         TcpClient clientSocket = default(TcpClient);
-        private void THREAD_MOD(string teste)
+        private void THREAD_MOD(string teste, Label x)
         {
-            labelNIM.Text = teste;
+            x.Text = teste;
         }
 
-        private void CHANGE_FORM(Form x,Form y)
+        private void CHANGE_GB(GroupBox x)
         {
-            x.Show();
-            y.Hide();
+            GBPilihKetuaKM.Visible = false;
+            GBTerimaKasih.Visible = false;
+            GBWelcomeScreen.Visible = false;
+            GBPilihMWA.Visible = false;
+            x.Visible = true;
         }
-        Pemilu1 biji = new Pemilu1();
         private void StartServer()
         {
-            Action<string> DelegateTeste_ModifyText = THREAD_MOD;
-            Action<Form,Form> changeForm = CHANGE_FORM;
+            Action<string,Label> DelegateTeste_ModifyText = THREAD_MOD;
+            Action<GroupBox> changeGB = CHANGE_GB;
+            Invoke(changeGB, GBWelcomeScreen );
             ServerListener.Start();
-            Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih");
+            Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih",labelNIM);
+            Invoke(DelegateTeste_ModifyText, "timer", labelTimer);
+            Invoke(DelegateTeste_ModifyText, "timer", labelTimer2);
             clientSocket = ServerListener.AcceptTcpClient();
-            Invoke(DelegateTeste_ModifyText, "13514076");
-            Invoke(changeForm, biji,this);
+            NetworkStream networkStream1 = clientSocket.GetStream();
+            byte[] bytesFromawal = new byte[20];
+            int j = networkStream1.Read(bytesFromawal, 0, 20);
+            string[] firstRead = System.Text.Encoding.ASCII.GetString(bytesFromawal,0,j).Split(',');
+            Debug.WriteLine(firstRead[0]);
+            Debug.WriteLine(firstRead[1]);
+            Invoke(DelegateTeste_ModifyText, firstRead[0],labelNIM);
+            System.Threading.Thread.Sleep(500);
+            Invoke(changeGB, GBPilihMWA);
             while (true)
             {
                 try
@@ -231,24 +245,115 @@ namespace PemiraClient
 
                     NetworkStream networkStream = clientSocket.GetStream();
                     byte[] bytesFrom = new byte[20];
-                    networkStream.Read(bytesFrom, 0, 20);
-                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom);
-                    //dataFromClient = dataFromClient.Substring(0, dataFromClient.IndexOf("$"));
-
-                    string serverResponse = "Received!";
+                    int i = networkStream.Read(bytesFrom, 0, 20);
+                    string dataFromClient = System.Text.Encoding.ASCII.GetString(bytesFrom,0,i);
+                    Debug.WriteLine(dataFromClient);
+                    if (GBPilihMWA.Visible)
+                    {
+                        Invoke(DelegateTeste_ModifyText, dataFromClient, labelTimer);
+                    }
+                    else if (GBPilihKetuaKM.Visible)
+                    {
+                        Invoke(DelegateTeste_ModifyText, dataFromClient, labelTimer2);
+                    }
+                    string serverResponse = "OK";
+                    if (nPress >= '0' && nPress <= '9')
+                    {
+                        if (GBPilihMWA.Visible == true)
+                        {
+                            serverResponse = ("MWA," + (nPress - '0').ToString() + "," + firstRead[0]);
+                        }
+                        else if (GBPilihKetuaKM.Visible == true)
+                        {
+                            serverResponse = ("K3M," + (nPress - '0').ToString() + "," + firstRead[0]);
+                        }
+                        nPress = -1;
+                    }
                     Byte[] sendBytes = Encoding.ASCII.GetBytes(serverResponse);
                     networkStream.Write(sendBytes, 0, sendBytes.Length);
                     networkStream.Flush();
+                    if (dataFromClient == "({timeout})")
+                    {
+                        if (GBPilihMWA.Visible)
+                        {
+                            if (firstRead[1] == "y")
+                            {
+                                MessageBox.Show("Pemilu akan dilanjutkan dengan pemilihan Ketua Kabinet KM ITB");
+                                serverResponse = "ready";
+                                sendBytes = Encoding.ASCII.GetBytes(serverResponse);
+                                networkStream.Write(sendBytes, 0, sendBytes.Length);
+                                networkStream.Flush();
+                                Invoke(changeGB, GBPilihKetuaKM);
+                            }
+                            else if (firstRead[1] == "n")
+                            {
+                                Invoke(changeGB, GBTerimaKasih);
+                                System.Threading.Thread.Sleep(1000);
+                                sendBytes = Encoding.ASCII.GetBytes("DONE");
+                                networkStream.Write(sendBytes, 0, sendBytes.Length);
+                                networkStream.Flush();
+                            }
+                        }
+                        else if (GBPilihKetuaKM.Visible)
+                        {
+                            Invoke(changeGB, GBTerimaKasih);
+                            System.Threading.Thread.Sleep(1000);
+                            sendBytes = Encoding.ASCII.GetBytes("DONE");
+                            networkStream.Write(sendBytes, 0, sendBytes.Length);
+                            networkStream.Flush();
+                        }
+                    }
+                    else
+                    {
+                        if (serverResponse != "OK")
+                        {
+                            if (GBPilihMWA.Visible)
+                            {
+                                if (firstRead[1] == "y")
+                                {
+                                    MessageBox.Show("Pemilu akan dilanjutkan dengan pemilihan Ketua Kabinet KM ITB");
+                                    serverResponse = "ready";
+                                    sendBytes = Encoding.ASCII.GetBytes(serverResponse);
+                                    networkStream.Write(sendBytes, 0, sendBytes.Length);
+                                    networkStream.Flush();
+                                    Invoke(changeGB, GBPilihKetuaKM);
+                                }
+                                else if (firstRead[1] == "n")
+                                {
+                                    Invoke(changeGB, GBTerimaKasih);
+                                    System.Threading.Thread.Sleep(1000);
+                                    sendBytes = Encoding.ASCII.GetBytes("DONE");
+                                    networkStream.Write(sendBytes, 0, sendBytes.Length);
+                                    networkStream.Flush();
+                                }
+                            }
+                            else if (GBPilihKetuaKM.Visible)
+                            {
+                                Invoke(changeGB, GBTerimaKasih);
+                                System.Threading.Thread.Sleep(1000);
+                                sendBytes = Encoding.ASCII.GetBytes("DONE");
+                                networkStream.Write(sendBytes, 0, sendBytes.Length);
+                                networkStream.Flush();
+                            }
+                        }
+                    }
                 }
                 catch
                 {
                     ServerListener.Stop();
+                    Invoke(changeGB, GBWelcomeScreen);
                     ServerListener.Start();
-                    Invoke(changeForm, this, biji);
-                    Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih");
+                    Invoke(DelegateTeste_ModifyText, "Hubungi operator untuk memilih",labelNIM);
                     clientSocket = ServerListener.AcceptTcpClient();
-                    Invoke(DelegateTeste_ModifyText, "13514075");
-                    Invoke(changeForm, biji, this);
+                    networkStream1 = clientSocket.GetStream();
+                    byte[] bytesFromawalx = new byte[20];
+                    j = networkStream1.Read(bytesFromawalx, 0, 20);
+                    firstRead = System.Text.Encoding.ASCII.GetString(bytesFromawalx,0,j).Split(',');
+                    Debug.WriteLine(firstRead[0]);
+                    Debug.WriteLine(firstRead[1]);
+                    Invoke(DelegateTeste_ModifyText, firstRead[0],labelNIM);
+                    System.Threading.Thread.Sleep(500);
+                    Invoke(changeGB, GBPilihMWA);
                 }
 
             }
@@ -258,6 +363,13 @@ namespace PemiraClient
         {
             InitializeComponent();
         }
-        
+        private int nPress = -1;
+        private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar >= '0' && e.KeyChar <= '9')
+            {
+                nPress = e.KeyChar;
+            }
+        }
     }
 }
