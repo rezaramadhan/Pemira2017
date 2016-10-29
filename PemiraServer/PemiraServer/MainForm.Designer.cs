@@ -60,7 +60,7 @@ namespace PemiraServer
             // 
             this.labelNIM.AutoSize = true;
             this.labelNIM.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelNIM.Location = new System.Drawing.Point(119, 42);
+            this.labelNIM.Location = new System.Drawing.Point(119, 69);
             this.labelNIM.Name = "labelNIM";
             this.labelNIM.Size = new System.Drawing.Size(72, 31);
             this.labelNIM.TabIndex = 0;
@@ -69,7 +69,7 @@ namespace PemiraServer
             // textBoxNIM
             // 
             this.textBoxNIM.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxNIM.Location = new System.Drawing.Point(197, 39);
+            this.textBoxNIM.Location = new System.Drawing.Point(197, 66);
             this.textBoxNIM.Name = "textBoxNIM";
             this.textBoxNIM.Size = new System.Drawing.Size(296, 38);
             this.textBoxNIM.TabIndex = 1;
@@ -78,7 +78,7 @@ namespace PemiraServer
             // buttonSubmitNIM
             // 
             this.buttonSubmitNIM.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonSubmitNIM.Location = new System.Drawing.Point(499, 39);
+            this.buttonSubmitNIM.Location = new System.Drawing.Point(499, 66);
             this.buttonSubmitNIM.Name = "buttonSubmitNIM";
             this.buttonSubmitNIM.Size = new System.Drawing.Size(111, 38);
             this.buttonSubmitNIM.TabIndex = 2;
@@ -179,7 +179,7 @@ namespace PemiraServer
             this.labelTimerBilik1.Name = "labelTimerBilik1";
             this.labelTimerBilik1.Size = new System.Drawing.Size(27, 20);
             this.labelTimerBilik1.TabIndex = 9;
-            this.labelTimerBilik1.Text = "10";
+            this.labelTimerBilik1.Text = TimerCountdown.MAXCOUNT.ToString();
             // 
             // labelBilikNIM2
             // 
@@ -223,7 +223,7 @@ namespace PemiraServer
             this.labelTimerBilik2.Name = "labelTimerBilik2";
             this.labelTimerBilik2.Size = new System.Drawing.Size(27, 20);
             this.labelTimerBilik2.TabIndex = 13;
-            this.labelTimerBilik2.Text = "10";
+            this.labelTimerBilik2.Text = TimerCountdown.MAXCOUNT.ToString();
             // 
             // panel3
             // 

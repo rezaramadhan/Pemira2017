@@ -19,7 +19,7 @@ namespace PemiraServer
         private string[] tag = { "1" , "2" };
         private bool[] isTwice;
         private const int MAXWAITING = 2;
-        private string[] host = { "192.168.43.90", "127.0.0.1" };
+        private string[] host = { "169.254.1.1", "127.0.0.1" };
         private int port = 13514;
       
         /*
