@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.Windows.Forms;
+
 namespace PemiraServer
 {
     class ServerSocket {
@@ -34,8 +36,12 @@ namespace PemiraServer
 
         public void send(string s) {
             byte[] outStream = Encoding.ASCII.GetBytes(s);
-            netStream.Write(outStream, 0, outStream.Length);
-
+            try {
+                netStream.Write(outStream, 0, outStream.Length);
+                netStream.Flush();
+            } catch {
+                MessageBox.Show("Client Disconnected");
+            }
         }
 
         public string recv() {
@@ -46,7 +52,7 @@ namespace PemiraServer
                 int bytesRead = netStream.Read(inStream, 0, client.ReceiveBufferSize);
                 s = Encoding.ASCII.GetString(inStream, 0, bytesRead);
             }
-            Debug.WriteLine(s.Length);
+            //Debug.WriteLine(s.Length);
             return s;
         }
     }
