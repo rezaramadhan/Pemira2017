@@ -34,6 +34,10 @@ namespace PemiraServer
             InitializeComponent();
             InitializeListView();
             InitializeVariable();
+            //dbDpt.printDB();
+            //dbQBilik1.printDB();
+            //dbQBilik2.printDB();
+            //dbWaitingList.printDB();
         }
 
         /*
@@ -172,41 +176,30 @@ namespace PemiraServer
         */
         private void buttonSubmitNIM_Click(object sender, EventArgs e)
         {
+            validasiNIM();
+        }
+
+        private void validasiNIM() {
             //DITAMBAHIN ALSON, tapi entah kenapa ga ngecek
-            if (dbDpt.isExistInDB(textBoxNIM.Text))
-            {
-                if (dbDpt.isAlreadyPickedMWAWM(textBoxNIM.Text))
-                {
-                    if (dbQBilik1.isExistInDB(textBoxNIM.Text))
-                    {
-                        if (dbQBilik2.isExistInDB(textBoxNIM.Text))
-                        {
-                            if (dbWaitingList.isExistInDB(textBoxNIM.Text))
-                            {
+            if (dbDpt.isExistInDB(textBoxNIM.Text)) {
+                if (dbDpt.isAlreadyPickedMWAWM(textBoxNIM.Text)) {
+                    if (dbQBilik1.isExistInDB(textBoxNIM.Text)) {
+                        if (dbQBilik2.isExistInDB(textBoxNIM.Text)) {
+                            if (dbWaitingList.isExistInDB(textBoxNIM.Text)) {
                                 addToWaiting();
-                            }
-                            else
-                            {
+                            } else {
                                 MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Waiting List!");
                             }
-                        }
-                        else
-                        {
+                        } else {
                             MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Bilik 2!");
                         }
-                    }
-                    else
-                    {
+                    } else {
                         MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Bilik 1!");
                     }
-                }
-                else
-                {
+                } else {
                     MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Pernah Memilih!");
                 }
-            }
-            else
-            {
+            } else {
                 MessageBox.Show("Nim " + textBoxNIM.Text + " Tidak Terdaftar di DPT!");
             }
         }
@@ -218,7 +211,7 @@ namespace PemiraServer
         {
             if (e.KeyCode == Keys.Enter)
             {
-                addToWaiting();
+                validasiNIM();
             }
         }
         

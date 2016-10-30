@@ -421,6 +421,7 @@ namespace PemiraServer
             //nim harus sudah ada dalam db
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
+
             return (foundRows[0].Field<string>("nomorPilihanMWAWM") != "0");
         }
 
