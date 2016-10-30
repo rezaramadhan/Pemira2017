@@ -134,7 +134,6 @@ namespace PemiraServer
             {
                 return true;
             }
-            MessageBox.Show("Not Found");
             return false;
         }
 
@@ -326,9 +325,9 @@ namespace PemiraServer
                 dptTableAdapter.FillRandomKM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
-                dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanKM");
+                //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanKM");
                 //DATA HANYA PILIHAN:
-                //dtExport = dv.ToTable(false, "nomorPilihanKM");
+                dtExport = dv.ToTable(false, "nomorPilihanKM");
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
@@ -360,9 +359,9 @@ namespace PemiraServer
                 dptTableAdapter.FillRandomMWAWM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
-                dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanMWAWM");
+                //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanMWAWM");
                 //DATA HANYA PILIHAN:
-                //dtExport = dv.ToTable(false, "nomorPilihanMWAWM");
+                dtExport = dv.ToTable(false, "nomorPilihanMWAWM");
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
@@ -455,7 +454,7 @@ namespace PemiraServer
             //nim harus sudah ada dalam db
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
-            return (foundRows[0].Field<string>("nomorPilihanKM") != "0");
+            return (foundRows[0].Field<int>("nomorPilihanKM") != 0);
         }
 
         public bool isAlreadyPickedMWAWM(string nim)
@@ -464,7 +463,7 @@ namespace PemiraServer
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
 
-            return (foundRows[0].Field<string>("nomorPilihanMWAWM") != "0");
+            return (foundRows[0].Field<int>("nomorPilihanMWAWM") != 0);
         }
 
         /*public void setAlreadyPicked(string nim, bool isAlreadyPicked)
