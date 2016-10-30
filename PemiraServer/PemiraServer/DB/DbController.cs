@@ -19,6 +19,20 @@ namespace PemiraServer
         public static PemiraDBDataSet.QBilik2DataTable dt = new PemiraDBDataSet.QBilik2DataTable();
         public static SqlCommand cmd = new SqlCommand();
 
+        public DataRowCollection getAllRows()
+        {
+            return dt.Rows;
+
+            //CARA ITERASI:
+            /*
+                MISAL: dr = getAllNim();
+
+                foreach(DataRow row in dr) {
+                    string singleNim = row["nim"].ToString();
+                }
+            */
+        }
+
         public bool isExistInDB(string nim)
         {
             string find = "nim = '" + nim + "'";
@@ -97,6 +111,20 @@ namespace PemiraServer
         public static PemiraDBDataSetTableAdapters.QBilik1TableAdapter QBilik1TableAdapter = new PemiraDBDataSetTableAdapters.QBilik1TableAdapter();
         public static PemiraDBDataSet.QBilik1DataTable dt = new PemiraDBDataSet.QBilik1DataTable();
         public static SqlCommand cmd = new SqlCommand();
+
+        public DataRowCollection getAllRows()
+        {
+            return dt.Rows;
+
+            //CARA ITERASI:
+            /*
+                MISAL: dr = getAllNim();
+
+                foreach(DataRow row in dr) {
+                    string singleNim = row["nim"].ToString();
+                }
+            */
+        }
 
         public bool isExistInDB(string nim)
         {
@@ -179,6 +207,20 @@ namespace PemiraServer
         public static PemiraDBDataSetTableAdapters.WaitingListTableAdapter waitingListTableAdapter = new PemiraDBDataSetTableAdapters.WaitingListTableAdapter();
         public static PemiraDBDataSet.WaitingListDataTable dt = new PemiraDBDataSet.WaitingListDataTable();
         public static SqlCommand cmd = new SqlCommand();
+
+        public DataRowCollection getAllRows()
+        {
+            return dt.Rows;
+
+            //CARA ITERASI:
+            /*
+                MISAL: dr = getAllNim();
+
+                foreach(DataRow row in dr) {
+                    string singleNim = row["nim"].ToString();
+                }
+            */
+        }
 
         public bool isExistInDB(string nim)
         {
