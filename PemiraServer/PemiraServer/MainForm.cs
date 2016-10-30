@@ -19,7 +19,9 @@ namespace PemiraServer
         private string[] tag = { "1" , "2" };
         private bool[] isTwice;
         private const int MAXWAITING = 2;
-        private string[] host = { "169.254.1.1", "127.0.0.1" };
+        //private string[] host = { "169.254.1.2", "169.254.1.3" };
+        private string[] host = { "127.0.0.1", "127.0.0.1" };
+
         private int port = 13514;
         private dbDPTController dbDpt = new dbDPTController();
         private dbQBilik1Controller dbQBilik1 = new dbQBilik1Controller();
@@ -34,7 +36,11 @@ namespace PemiraServer
             InitializeComponent();
             InitializeListView();
             InitializeVariable();
-            //dbDpt.printDB();
+            InitializeQueue();
+            //dbDpt.importCSV("E:/MOCKss.csv");
+            dbDpt.printDB();
+            //dbDpt.exportCSVmwawm("E:/MWA.csv");
+            //dbDpt.exportCSVkm("E:/K3M.csv");
             //dbQBilik1.printDB();
             //dbQBilik2.printDB();
             //dbWaitingList.printDB();
@@ -54,8 +60,47 @@ namespace PemiraServer
                 time[i].Tick += new EventHandler(time_Tick);
                 sock[i] = new ServerSocket(host[i], port);
             }
+
         }
         
+        private void InitializeQueue() {
+            loadQueueFromDB();
+            string s;
+
+            while (listViewBilik1.Items.Count < 2) {
+                s = listViewWaiting.Items[0].Text;
+                listViewBilik1.Items.Add(s);
+                listViewWaiting.Items.RemoveAt(0);
+            }
+
+            while (listViewBilik2.Items.Count < 2) {
+                s = listViewWaiting.Items[0].Text;
+                listViewBilik2.Items.Add(s);
+                listViewWaiting.Items.RemoveAt(0);
+            }
+        }
+
+        private void loadQueueFromDB() {
+            DataRowCollection dr = dbWaitingList.getAllRows();
+            string NIM;
+
+            foreach (DataRow r in dr) {
+                NIM = r["nim"].ToString();
+                listViewWaiting.Items.Add(NIM);
+            }
+
+            dr = dbQBilik1.getAllRows();
+            foreach (DataRow r in dr) {
+                NIM = r["nim"].ToString();
+                listViewBilik1.Items.Add(NIM);
+            }
+
+            dr = dbQBilik2.getAllRows();
+            foreach (DataRow r in dr) {
+                NIM = r["nim"].ToString();
+                listViewBilik2.Items.Add(NIM);
+            }
+        }
      
         /*
             Function to add the content of textBoxNIM to waiting list            
@@ -94,10 +139,18 @@ namespace PemiraServer
 
         private void STOP_VOTE(ListView listNIM, Button bGrant, TimerCountdown t, Label lTimer) {
 
-            
+            //hapus dari db Queue
+            if (bGrant.Name == "buttonGrant1") {
+                dbQBilik1.delNim(listNIM.Items[0].Text);
+            } else {
+                dbQBilik2.delNim(listNIM.Items[0].Text);
+            }
+
             listNIM.Items.RemoveAt(0);
+
             // Add from listWaiting to bilik
             if (listViewWaiting.Items.Count > 0) {
+                
                 string s = listViewWaiting.Items[0].Text;
                 listNIM.Items.Add(s);
                 //DITAMBAHIN ALSON
@@ -110,10 +163,18 @@ namespace PemiraServer
             t.reset();
 
             lTimer.Text = TimerCountdown.MAXCOUNT.ToString();
+
+            dbDpt.printDB();
+
         }
 
         private void ACCEPT_VOTE(string[] args, int i) {
             //masukin pilihan ke database, masukin juga bahwa NIM x udah milih
+            if (args[0] == "K3M") {
+                dbDpt.setChoiceKM(args[2], args[1]);
+            } else if (args[0] == "MWA") {
+                dbDpt.setChoiceMWAWM(args[2], args[1]);
+            }
 
             //ubah label waktu
             ListView listNIM;
@@ -287,16 +348,19 @@ namespace PemiraServer
 
             // Timer's empty, stop
             if (count <= 0) {
+                sock[idx].send("({timeout})");
+                //add to DB
+
+
                 if (isTwice[idx]) {
                     t.counter = TimerCountdown.MAXCOUNT;
-                    sock[idx].send("({timeout})");
+                    
                     count = t.counter;
                     isTwice[idx] = false;
                     t.Stop();
                     t.reset();
                     //dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
                 } else {
-                    sock[idx].send("({timeout})");
                     sock[idx].disconnect();
                     //tandain NIM x udah vote di database
 
