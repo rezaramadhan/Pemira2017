@@ -18,6 +18,7 @@ namespace PemiraServer
         private TimerCountdown[] time;
         private string[] tag = { "1" , "2" };
         private bool[] isTwice;
+        private bool[] isS1;
         private const int MAXWAITING = 2;
         //private string[] host = { "169.254.1.2", "169.254.1.3" };
         private string[] host = { "127.0.0.1", "127.0.0.1" };
@@ -51,6 +52,7 @@ namespace PemiraServer
         */
         private void InitializeVariable() {
             isTwice = new bool[MAXWAITING];
+            isS1 = new bool[MAXWAITING];
             time = new TimerCountdown[MAXWAITING];
             sock = new ServerSocket[MAXWAITING];
 
@@ -295,6 +297,11 @@ namespace PemiraServer
 
             if (listNIM.Items.Count > 0) { //sukses
                 isTwice[idx] = listNIM.Items[0].Text[0] == '1';
+                isS1[idx] = isTwice[idx];
+                if (!isTwice[idx])
+                {
+                    dbDpt.setChoiceKM(listNIM.Items[0].Text, "999");
+                }
                 source.Enabled = false;
                 time[idx].Start();
                 sock[idx].connect();
@@ -359,11 +366,18 @@ namespace PemiraServer
                     isTwice[idx] = false;
                     t.Stop();
                     t.reset();
-                    //dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
+                    dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "999");
                 } else {
                     sock[idx].disconnect();
                     //tandain NIM x udah vote di database
-
+                    if (isS1[idx])
+                    {
+                        dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
+                    }
+                    else
+                    {
+                        dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "999");
+                    }
                     STOP_VOTE(listNIM, bGrant, t, lTimer);
                 }
             } else {
