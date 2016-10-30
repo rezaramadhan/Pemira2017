@@ -61,13 +61,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TimerCountdown.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="DB\DbController.cs" />
     <Compile Include="PemiraDBDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PemiraDBDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TimerCountdown.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ServerSocket.cs" />
     <Compile Include="MainForm.cs">

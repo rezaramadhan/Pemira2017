@@ -21,6 +21,10 @@ namespace PemiraServer
         private const int MAXWAITING = 2;
         private string[] host = { "169.254.1.1", "127.0.0.1" };
         private int port = 13514;
+        private dbDPTController dbDpt = new dbDPTController();
+        private dbQBilik1Controller dbQBilik1 = new dbQBilik1Controller();
+        private dbQBilik2Controller dbQBilik2 = new dbQBilik2Controller();
+        private dbWaitingListController dbWaitingList = new dbWaitingListController();
       
         /*
             Constructors             
@@ -60,18 +64,24 @@ namespace PemiraServer
                 int countBilik1 = listViewBilik1.Items.Count;
                 int countBilik2 = listViewBilik2.Items.Count;
                 if (countBilik2 < MAXWAITING) {
+                    //DITAMBAHIN ALSON, semua addNimnya
                     if (countBilik1 == 0) {
+                        dbQBilik1.addNim(s);
                         listViewBilik1.Items.Add(s);
                     } else {
+                        dbQBilik2.addNim(s);
                         listViewBilik2.Items.Add(s);
                     }
                 } else if (countBilik1 < MAXWAITING) {
                     if (countBilik2 == 0) {
+                        dbQBilik2.addNim(s);
                         listViewBilik2.Items.Add(s);
                     } else {
+                        dbQBilik1.addNim(s);
                         listViewBilik1.Items.Add(s);
                     }
                 } else {
+                    dbWaitingList.addNim(s);
                     listViewWaiting.Items.Add(s);
                 }
             }
@@ -86,6 +96,8 @@ namespace PemiraServer
             if (listViewWaiting.Items.Count > 0) {
                 string s = listViewWaiting.Items[0].Text;
                 listNIM.Items.Add(s);
+                //DITAMBAHIN ALSON
+                dbWaitingList.delNim(listViewWaiting.Items[0].Text);
                 listViewWaiting.Items.RemoveAt(0);
             }
 
@@ -160,7 +172,43 @@ namespace PemiraServer
         */
         private void buttonSubmitNIM_Click(object sender, EventArgs e)
         {
-            addToWaiting();
+            //DITAMBAHIN ALSON, tapi entah kenapa ga ngecek
+            if (dbDpt.isExistInDB(textBoxNIM.Text))
+            {
+                if (dbDpt.isAlreadyPickedMWAWM(textBoxNIM.Text))
+                {
+                    if (dbQBilik1.isExistInDB(textBoxNIM.Text))
+                    {
+                        if (dbQBilik2.isExistInDB(textBoxNIM.Text))
+                        {
+                            if (dbWaitingList.isExistInDB(textBoxNIM.Text))
+                            {
+                                addToWaiting();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Waiting List!");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Bilik 2!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Bilik 1!");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Pernah Memilih!");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Nim " + textBoxNIM.Text + " Tidak Terdaftar di DPT!");
+            }
         }
 
         /*
@@ -253,6 +301,7 @@ namespace PemiraServer
                     isTwice[idx] = false;
                     t.Stop();
                     t.reset();
+                    //dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
                 } else {
                     sock[idx].send("({timeout})");
                     sock[idx].disconnect();
