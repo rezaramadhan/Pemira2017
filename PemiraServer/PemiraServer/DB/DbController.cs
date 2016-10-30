@@ -13,6 +13,83 @@ using System.IO;
 
 namespace PemiraServer
 {
+
+    public class dbImportStatusController
+    {
+        public static PemiraDBDataSetTableAdapters.ImportStatusTableAdapter importTableAdapter = new PemiraDBDataSetTableAdapters.ImportStatusTableAdapter();
+        public static PemiraDBDataSet.ImportStatusDataTable dt = new PemiraDBDataSet.ImportStatusDataTable();
+        public static SqlCommand cmd = new SqlCommand();
+        public static Label importStatusLabel;
+
+        public void writeStatusOnLabel()
+        {
+            importStatusLabel.ForeColor = System.Drawing.Color.Green;
+            string newStatus = "Database Has Been Imported\n";
+            newStatus += "From: " + dt.Rows[dt.Count - 1]["Path"] + "\n";
+            //newStatus += "On: " + dt.Rows[dt.Count - 1]["LastUpdated"].ToString() + "\n";
+            newStatus += "By: " + dt.Rows[dt.Count - 1]["MachineName"];
+            importStatusLabel.Text = newStatus;
+        }
+
+        public void setImportStatusLabel(Label _importStatusLabel)
+        {
+            importStatusLabel = _importStatusLabel;
+        }
+
+        public void updateImportStatusLabel()
+        {
+            importTableAdapter.Fill(dt);
+            if (dt.Count > 0)
+            {
+                this.writeStatusOnLabel();
+            }
+            else
+            {
+                importStatusLabel.ForeColor = System.Drawing.Color.Red;
+                importStatusLabel.Text = "No DPT Database imported";
+            }
+        }
+
+        public dbImportStatusController()
+        {
+            try
+            {
+                cmd.Connection = importTableAdapter.Connection;
+                importTableAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("DataBase Open error\nMessage: " + e.Message + "\n\nSource: " + e.Source);
+            }
+        }
+
+        public void addNewImportStatus(string path, string machineName)
+        {
+            string query =
+                @"INSERT INTO dbo.ImportStatus (Path, MachineName) VALUES ('" + path + "','" + machineName + "')";
+            cmd.CommandText = query;
+            this.execute(query);
+            importTableAdapter.Fill(dt);
+            this.writeStatusOnLabel();
+        }
+
+        public bool execute(string query)
+        {
+            cmd.CommandText = query;
+            try
+            {
+                cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Query error\nmessage: " + e.Message + "\n\nsource:" + e.Source);
+                return false;
+            }
+        }
+    }
     public class dbQBilik2Controller
     {
         public static PemiraDBDataSetTableAdapters.QBilik2TableAdapter QBilik2TableAdapter = new PemiraDBDataSetTableAdapters.QBilik2TableAdapter();
@@ -271,7 +348,7 @@ namespace PemiraServer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Query error\nmessage: " + e.Message + "\n\nsource:" + e.Source);
+                MessageBox.Show("Query error"  + "\n\nSource:" + e.Source);
                 return false;
             }
         }
@@ -331,7 +408,7 @@ namespace PemiraServer
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
-                    MessageBox.Show("Export Successful\nNumber of rows: " + dtExport.Rows.Count);
+                    MessageBox.Show("Export KM results Successful");//\nNumber of rows: " + dtExport.Rows.Count);
                     isSuccess = true;
                 }
                 catch (Exception e)
@@ -365,7 +442,7 @@ namespace PemiraServer
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
-                    MessageBox.Show("Export Successful\nNumber of rows: " + dtExport.Rows.Count);
+                    MessageBox.Show("Export MWAWM results Successful");//\nNumber of rows: " + dtExport.Rows.Count);
                     isSuccess = true;
                 }
                 catch (Exception e)
@@ -376,7 +453,7 @@ namespace PemiraServer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Query Error\nMesage: " + e.Message + "\n\nSource: " + e.Source);
+                MessageBox.Show("Query Error" + "\n\nSource: " + e.Source);
             }
 
             dptTableAdapter.Fill(dt);
@@ -416,7 +493,7 @@ namespace PemiraServer
             }
             else
             {
-                MessageBox.Show("Import aborted");
+                MessageBox.Show("Import aborted\nPlease Check .csv File Format => nama,nim");
                 return false;
             }
         }
@@ -508,7 +585,7 @@ namespace PemiraServer
             }
             catch (Exception e)
             {
-                MessageBox.Show("Query error\nmessage: " + e.Message + "\n\nsource:" + e.Source);
+                MessageBox.Show("Query error" + "\n\nSource: " + e.Source);
                 return false;
             }
         }

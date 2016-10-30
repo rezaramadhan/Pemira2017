@@ -28,6 +28,7 @@ namespace PemiraServer
         private dbQBilik1Controller dbQBilik1 = new dbQBilik1Controller();
         private dbQBilik2Controller dbQBilik2 = new dbQBilik2Controller();
         private dbWaitingListController dbWaitingList = new dbWaitingListController();
+        private dbImportStatusController dbImport = new dbImportStatusController();
       
         /*
             Constructors             
@@ -39,7 +40,7 @@ namespace PemiraServer
             InitializeVariable();
             InitializeQueue();
             //dbDpt.importCSV("E:/MOCKss.csv");
-            dbDpt.printDB();
+            //dbDpt.printDB();
             //dbDpt.exportCSVmwawm("E:/MWA.csv");
             //dbDpt.exportCSVkm("E:/K3M.csv");
             //dbQBilik1.printDB();
@@ -62,7 +63,8 @@ namespace PemiraServer
                 time[i].Tick += new EventHandler(time_Tick);
                 sock[i] = new ServerSocket(host[i], port);
             }
-
+            dbImport.setImportStatusLabel(importStatusLabel);
+            dbImport.updateImportStatusLabel();
         }
         
         private void InitializeQueue() {
@@ -386,6 +388,28 @@ namespace PemiraServer
             }
         }
 
+        private void importButton_Click(object sender, EventArgs e)
+        {
+            var fd = new System.Windows.Forms.OpenFileDialog();
+            fd.Filter = "CSV files (*.csv)|*.csv";
+            fd.InitialDirectory = System.Environment.CurrentDirectory;
+            fd.Title = "Please select file to import.";
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string fileToOpen = fd.FileName;
+                if (dbDpt.importCSV(fileToOpen))
+                {
+                    dbImport.addNewImportStatus(fileToOpen, System.Environment.MachineName);
+                };
+                //importStatusLabel.Text = fileToOpen + "\n" + System.Environment.MachineName;
+                //importStatusLabel.ForeColor = System.Drawing.Color.Green;
+            }
+        }
 
+        private void exportButton_Click(object sender, EventArgs e)
+        {
+            ExportForm ef = new ExportForm();
+            ef.ShowDialog();
+        }
     }
 }
