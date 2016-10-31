@@ -493,7 +493,7 @@ namespace PemiraServer
             }
             else
             {
-                MessageBox.Show("Import aborted\nPlease Check .csv File Format => nama,nim");
+                MessageBox.Show("Import from " + path + " aborted\nPlease Check .csv File Format => nama,nim");
                 return false;
             }
         }

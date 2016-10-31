@@ -66,24 +66,32 @@ namespace PemiraServer
 
             if (isValid)
             {
-                bool isSuccessful = true;
-                string msg = "";
-                dbDPTController dbDpt = new dbDPTController();
-                string pathKM = System.Environment.CurrentDirectory + @"\exportKM.csv";
-                //Cek apakah berhasil export km
-                isSuccessful &= dbDpt.exportCSVkm(pathKM);
-                string pathMWAWM = System.Environment.CurrentDirectory + @"\exportMWAWM.csv";
-                //Cek apakah berhasil export mwawm
-                isSuccessful &= dbDpt.exportCSVmwawm(pathMWAWM);
-                if (isSuccessful)
+                var fd = new FolderBrowserDialog();
+                //fd.InitialDirectory = System.Environment.CurrentDirectory;
+                //fd.Title = "Please select file to import.";
+                if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    msg += "Export Successful!\n";
-                    msg += "File Exported to: " + System.Environment.CurrentDirectory + "\n";
-                    msg += "File names: exportKM.csv and exportMWAWM.csv";
+                    string selectedPath = fd.SelectedPath;
+
+                    bool isSuccessful = true;
+                    string msg = "";
+                    dbDPTController dbDpt = new dbDPTController();
+                    string pathKM = selectedPath + @"\exportKM.csv";
+                    //Cek apakah berhasil export km
+                    isSuccessful &= dbDpt.exportCSVkm(pathKM);
+                    string pathMWAWM = selectedPath + @"\exportMWAWM.csv";
+                    //Cek apakah berhasil export mwawm
+                    isSuccessful &= dbDpt.exportCSVmwawm(pathMWAWM);
+                    if (isSuccessful)
+                    {
+                        msg += "Export Successful!\n";
+                        msg += "File Exported to: " + selectedPath + "\n";
+                        msg += "File names: exportKM.csv and exportMWAWM.csv";
+                    }
+
+                    MessageBox.Show(msg);
+                    this.Close();
                 }
-                
-                MessageBox.Show(msg);
-                this.Close();
             }
             else
             {
