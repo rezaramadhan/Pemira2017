@@ -248,9 +248,9 @@ namespace PemiraServer
             //DITAMBAHIN ALSON, tapi entah kenapa ga ngecek
             if (dbDpt.isExistInDB(textBoxNIM.Text)) {
                 if (!dbDpt.isAlreadyPickedMWAWM(textBoxNIM.Text)) {
-                    if (dbQBilik1.isExistInDB(textBoxNIM.Text)) {
-                        if (dbQBilik2.isExistInDB(textBoxNIM.Text)) {
-                            if (dbWaitingList.isExistInDB(textBoxNIM.Text)) {
+                    if (!dbQBilik1.isExistInDB(textBoxNIM.Text)) {
+                        if (!dbQBilik2.isExistInDB(textBoxNIM.Text)) {
+                            if (!dbWaitingList.isExistInDB(textBoxNIM.Text)) {
                                 addToWaiting();
                             } else {
                                 MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Ada di Waiting List!");
