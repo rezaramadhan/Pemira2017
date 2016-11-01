@@ -13,6 +13,83 @@ using System.IO;
 
 namespace PemiraServer
 {
+    /*public class dbDfault
+    {
+        public static DatasetTableAdapter passwordsTableAdapter = new PemiraDBDataSetTableAdapters.KunciPasswordsTableAdapter();
+        public static DataTable dt;
+        public static SqlCommand cmd = new SqlCommand();
+    }*/
+
+    public class dbKunciPasswordsController
+    {
+        public static PemiraDBDataSetTableAdapters.KunciPasswordsTableAdapter passwordsTableAdapter = new PemiraDBDataSetTableAdapters.KunciPasswordsTableAdapter();
+        public static PemiraDBDataSet.KunciPasswordsDataTable dt = new PemiraDBDataSet.KunciPasswordsDataTable();
+        public static SqlCommand cmd = new SqlCommand();
+
+        public dbKunciPasswordsController()
+        {
+            try
+            {
+                cmd.Connection = passwordsTableAdapter.Connection;
+                passwordsTableAdapter.Fill(dt);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("DataBase Open error\nMessage: " + e.Message + "\n\nSource: " + e.Source);
+            }
+        }
+
+        public string getPassword(int id)
+        {
+            string find = "id = '" + id + "'";
+            DataRow[] foundRows = dt.Select(find);
+            return foundRows[0]["password"].ToString();
+        }
+
+        public int getDataCount()
+        {
+            return dt.Count;
+        }
+        public bool execute(string query)
+        {
+            cmd.CommandText = query;
+            try
+            {
+                cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                cmd.Connection.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Query error\nmessage: " + e.Message + "\n\nsource:" + e.Source);
+                return false;
+            }
+        }
+
+        public void addPassword(string pass)
+        {
+            passwordsTableAdapter.Insert(pass);
+            passwordsTableAdapter.Fill(dt);
+        }
+
+        public void printDB()
+        {
+            string printOut = "";
+            passwordsTableAdapter.Fill(dt);
+            foreach (DataRow dr in dt.Rows)
+            {
+                foreach (DataColumn dc in dt.Columns)
+                {
+                    printOut += dr[dc].ToString();
+                    printOut += " ";
+                }
+                printOut += "\n";
+            }
+            printOut += "Size: " + dt.Rows.Count;
+            MessageBox.Show(printOut);
+        }
+    }
 
     public class dbImportStatusController
     {
@@ -392,6 +469,67 @@ namespace PemiraServer
             }
         }
 
+        public bool exportCSVdpt(string path)
+        {
+            var dtRaw = new PemiraDBDataSet.DPTDataTable();
+            bool isSuccess = true;
+            DataTable dtUnfiltered = new DataTable();
+            DataTable dtExport = new DataTable();
+            try
+            {
+                dptTableAdapter.FillByDPT(dtRaw);
+                DataView dv = new DataView(dtRaw);
+                dtExport = dv.ToTable(false, "nama", "nim");
+                try
+                {
+                    WriteToFile(dtExport, path, false, ",");
+                    isSuccess = true;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Export Error\nMesage: " + e.Message + "\n\nSource: " + e.Source);
+                    isSuccess = false;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Query Error\nMesage: " + e.Message + "\n\nSource: " + e.Source);
+            }
+
+            dptTableAdapter.Fill(dt);
+            return isSuccess;
+        }
+
+        public bool exportCSVdp(string path)
+        {
+            var dtRaw = new PemiraDBDataSet.DPTDataTable();
+            bool isSuccess = true;
+            DataTable dtExport = new DataTable();
+            try
+            {
+                dptTableAdapter.Fill(dtRaw);
+                DataView dv = new DataView(dtRaw);
+                dtExport = dv.ToTable(false, "nama", "nim");
+                try
+                {
+                    WriteToFile(dtExport, path, false, ",");
+                    isSuccess = true;
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show("Export Error\nMesage: " + e.Message + "\n\nSource: " + e.Source);
+                    isSuccess = false;
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Query Error\nMesage: " + e.Message + "\n\nSource: " + e.Source);
+            }
+
+            dptTableAdapter.Fill(dt);
+            return isSuccess;
+        }
+
         public bool exportCSVkm(string path)
         {
             var dtRandom = new PemiraDBDataSet.DPTDataTable();
@@ -399,7 +537,7 @@ namespace PemiraServer
             DataTable dtExport = new DataTable();
             try
             {
-                dptTableAdapter.FillRandomKM(dtRandom);
+                //dptTableAdapter.FillRandomKM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
                 //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanKM");
@@ -433,7 +571,7 @@ namespace PemiraServer
             DataTable dtExport = new DataTable();
             try
             {
-                dptTableAdapter.FillRandomMWAWM(dtRandom);
+                //dptTableAdapter.FillRandomMWAWM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
                 //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanMWAWM");
@@ -599,7 +737,7 @@ namespace PemiraServer
             {
                 for (int i = 0; i < icolcount; i++)
                 {
-                    sw.Write(dataSource.Columns[i]);
+                    sw.Write(dataSource.Columns[i].ToString().ToUpper());
                     if (i < icolcount - 1)
                         sw.Write(seperator);
                 }

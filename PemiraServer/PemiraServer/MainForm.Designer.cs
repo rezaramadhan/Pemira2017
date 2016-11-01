@@ -54,6 +54,8 @@ namespace PemiraServer
             this.importStatusLabel = new System.Windows.Forms.Label();
             this.exportButton = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.exportDpButton = new System.Windows.Forms.Button();
+            this.exportDptButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -260,11 +262,11 @@ namespace PemiraServer
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(31, 525);
+            this.importButton.Location = new System.Drawing.Point(31, 592);
             this.importButton.Name = "importButton";
             this.importButton.Size = new System.Drawing.Size(125, 93);
             this.importButton.TabIndex = 11;
-            this.importButton.Text = "Import DPT Database (.csv)";
+            this.importButton.Text = "Import Database (.csv)";
             this.importButton.UseVisualStyleBackColor = true;
             this.importButton.Click += new System.EventHandler(this.importButton_Click);
             // 
@@ -272,7 +274,7 @@ namespace PemiraServer
             // 
             this.import.AutoSize = true;
             this.import.ForeColor = System.Drawing.Color.Black;
-            this.import.Location = new System.Drawing.Point(162, 525);
+            this.import.Location = new System.Drawing.Point(162, 592);
             this.import.Name = "import";
             this.import.Size = new System.Drawing.Size(149, 17);
             this.import.TabIndex = 12;
@@ -283,7 +285,7 @@ namespace PemiraServer
             this.importStatusLabel.AutoSize = true;
             this.importStatusLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.importStatusLabel.ForeColor = System.Drawing.Color.Red;
-            this.importStatusLabel.Location = new System.Drawing.Point(162, 542);
+            this.importStatusLabel.Location = new System.Drawing.Point(162, 609);
             this.importStatusLabel.Name = "importStatusLabel";
             this.importStatusLabel.Size = new System.Drawing.Size(240, 20);
             this.importStatusLabel.TabIndex = 13;
@@ -291,7 +293,7 @@ namespace PemiraServer
             // 
             // exportButton
             // 
-            this.exportButton.Location = new System.Drawing.Point(31, 624);
+            this.exportButton.Location = new System.Drawing.Point(31, 525);
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(125, 61);
             this.exportButton.TabIndex = 14;
@@ -310,11 +312,33 @@ namespace PemiraServer
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // exportDpButton
+            // 
+            this.exportDpButton.Location = new System.Drawing.Point(162, 525);
+            this.exportDpButton.Name = "exportDpButton";
+            this.exportDpButton.Size = new System.Drawing.Size(125, 61);
+            this.exportDpButton.TabIndex = 15;
+            this.exportDpButton.Text = "Export DP\r\nstatus";
+            this.exportDpButton.UseVisualStyleBackColor = true;
+            this.exportDpButton.Click += new System.EventHandler(this.exportDpButton_Click);
+            // 
+            // exportDptButton
+            // 
+            this.exportDptButton.Location = new System.Drawing.Point(293, 525);
+            this.exportDptButton.Name = "exportDptButton";
+            this.exportDptButton.Size = new System.Drawing.Size(125, 61);
+            this.exportDptButton.TabIndex = 16;
+            this.exportDptButton.Text = "Export DPT status";
+            this.exportDptButton.UseVisualStyleBackColor = true;
+            this.exportDptButton.Click += new System.EventHandler(this.exportDptButton_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(993, 695);
+            this.ClientSize = new System.Drawing.Size(993, 703);
+            this.Controls.Add(this.exportDptButton);
+            this.Controls.Add(this.exportDpButton);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.importStatusLabel);
             this.Controls.Add(this.import);
@@ -384,6 +408,8 @@ namespace PemiraServer
         private Label import;
         private Label importStatusLabel;
         private Button exportButton;
+        private Button exportDpButton;
+        private Button exportDptButton;
     }
 }
 

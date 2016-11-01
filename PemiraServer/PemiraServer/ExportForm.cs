@@ -17,7 +17,7 @@ namespace PemiraServer
         public ExportForm()
         {
             InitializeComponent();
-            InitializePassword();
+            //InitializePassword();
         }
 
         private void InitializePassword()

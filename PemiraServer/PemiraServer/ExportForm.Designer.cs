@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
+            this.password1TB = new System.Windows.Forms.TextBox();
+            this.okButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.password1TB = new System.Windows.Forms.TextBox();
             this.password2TB = new System.Windows.Forms.TextBox();
             this.password3TB = new System.Windows.Forms.TextBox();
             this.password4TB = new System.Windows.Forms.TextBox();
             this.password5TB = new System.Windows.Forms.TextBox();
-            this.okButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -50,6 +50,36 @@
             this.label1.Size = new System.Drawing.Size(93, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Password #1:";
+            // 
+            // password1TB
+            // 
+            this.password1TB.Location = new System.Drawing.Point(112, 10);
+            this.password1TB.Name = "password1TB";
+            this.password1TB.Size = new System.Drawing.Size(178, 22);
+            this.password1TB.TabIndex = 5;
+            this.password1TB.UseSystemPasswordChar = true;
+            // 
+            // okButton
+            // 
+            this.okButton.Location = new System.Drawing.Point(83, 170);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(75, 23);
+            this.okButton.TabIndex = 10;
+            this.okButton.Text = "Ok";
+            this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.AccessibleName = "";
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Location = new System.Drawing.Point(164, 170);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 11;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // label2
             // 
@@ -87,14 +117,6 @@
             this.label5.TabIndex = 4;
             this.label5.Text = "Password #5:";
             // 
-            // password1TB
-            // 
-            this.password1TB.Location = new System.Drawing.Point(112, 10);
-            this.password1TB.Name = "password1TB";
-            this.password1TB.Size = new System.Drawing.Size(178, 22);
-            this.password1TB.TabIndex = 5;
-            this.password1TB.UseSystemPasswordChar = true;
-            // 
             // password2TB
             // 
             this.password2TB.Location = new System.Drawing.Point(112, 38);
@@ -127,28 +149,6 @@
             this.password5TB.TabIndex = 9;
             this.password5TB.UseSystemPasswordChar = true;
             // 
-            // okButton
-            // 
-            this.okButton.Location = new System.Drawing.Point(83, 170);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(75, 23);
-            this.okButton.TabIndex = 10;
-            this.okButton.Text = "Ok";
-            this.okButton.UseVisualStyleBackColor = true;
-            this.okButton.Click += new System.EventHandler(this.okButton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.AccessibleName = "";
-            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(164, 170);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 11;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
-            // 
             // ExportForm
             // 
             this.AcceptButton = this.okButton;
@@ -178,16 +178,16 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox password1TB;
+        private System.Windows.Forms.Button okButton;
+        private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox password1TB;
         private System.Windows.Forms.TextBox password2TB;
         private System.Windows.Forms.TextBox password3TB;
         private System.Windows.Forms.TextBox password4TB;
         private System.Windows.Forms.TextBox password5TB;
-        private System.Windows.Forms.Button okButton;
-        private System.Windows.Forms.Button cancelButton;
     }
 }

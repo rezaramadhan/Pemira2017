@@ -68,6 +68,14 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM DPT WHERE (Id = @Id
               <Mapping SourceColumn="nomorPilihanMWAWM" DataSetColumn="nomorPilihanMWAWM" />
             </Mappings>
             <Sources>
+              <DbSource ConnectionRef="PemiraDBConnectionString (Settings)" DbObjectName="dbo.DPT" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillByDPT" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataByDPT" GeneratorSourceName="FillByDPT" GetMethodModifier="Public" GetMethodName="GetDataByDPT" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataByDPT" UserSourceName="FillByDPT">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM dbo.DPT WHERE nim LIKE '1%'</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
               <DbSource ConnectionRef="PemiraDBConnectionString (Settings)" DbObjectName="dbo.DPT" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillRandomKM" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataRandomKM" GeneratorSourceName="FillRandomKM" GetMethodModifier="Public" GetMethodName="GetDataRandomKM" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataRandomKM" UserSourceName="FillRandomKM">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
@@ -79,7 +87,8 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM DPT WHERE (Id = @Id
               <DbSource ConnectionRef="PemiraDBConnectionString (Settings)" DbObjectName="dbo.DPT" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="FillRandomMWAWM" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetDataRandomMWAWM" GeneratorSourceName="FillRandomMWAWM" GetMethodModifier="Public" GetMethodName="GetDataRandomMWAWM" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetDataRandomMWAWM" UserSourceName="FillRandomMWAWM">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM dbo.DPT WHERE ((nomorPilihanMWAWM &lt;&gt; 0) AND (nomorPilihanMWAWM &lt;&gt; 999)) ORDER BY NEWID()</CommandText>
+                    <CommandText>SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM dbo.DPT WHERE ((nomorPilihanMWAWM &lt;&gt; 0) AND (nomorPilihanMWAWM &lt;&gt; 999)) ORDER BY NEWID()
+</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -125,8 +134,8 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM DPT WHERE (Id = @Id
                   </DbCommand>
                 </InsertCommand>
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT Path, CONVERT(varchar(20), LastUpdated, 120) AS LastUpdated, MachineName FROM dbo.ImportStatus</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Path, LastUpdated, MachineName FROM dbo.ImportStatus</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -134,8 +143,55 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM FROM DPT WHERE (Id = @Id
             </MainSource>
             <Mappings>
               <Mapping SourceColumn="Path" DataSetColumn="Path" />
-              <Mapping SourceColumn="MachineName" DataSetColumn="MachineName" />
               <Mapping SourceColumn="LastUpdated" DataSetColumn="LastUpdated" />
+              <Mapping SourceColumn="MachineName" DataSetColumn="MachineName" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="KunciPasswordsTableAdapter" GeneratorDataComponentClassName="KunciPasswordsTableAdapter" Name="KunciPasswords" UserDataComponentName="KunciPasswordsTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="PemiraDBConnectionString (Settings)" DbObjectName="dbo.KunciPasswords" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <DeleteCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>DELETE FROM [dbo].[KunciPasswords] WHERE (([Id] = @Original_Id) AND ([password] = @Original_password))</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_Id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_password" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="password" SourceColumnNullMapping="false" SourceVersion="Original" />
+                    </Parameters>
+                  </DbCommand>
+                </DeleteCommand>
+                <InsertCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>INSERT INTO [dbo].[KunciPasswords] ([password]) VALUES (@password);
+SELECT Id, password FROM KunciPasswords WHERE (Id = SCOPE_IDENTITY())</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@password" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="password" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </InsertCommand>
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT Id, password FROM dbo.KunciPasswords</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+                <UpdateCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>UPDATE [dbo].[KunciPasswords] SET [password] = @password WHERE (([Id] = @Original_Id) AND ([password] = @Original_password));
+SELECT Id, password FROM KunciPasswords WHERE (Id = @Id)</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@password" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="password" SourceColumnNullMapping="false" SourceVersion="Current" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="Int32" Direction="Input" ParameterName="@Original_Id" Precision="0" ProviderType="Int" Scale="0" Size="0" SourceColumn="Id" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="" DataSourceName="" DbType="AnsiString" Direction="Input" ParameterName="@Original_password" Precision="0" ProviderType="VarChar" Scale="0" Size="0" SourceColumn="password" SourceColumnNullMapping="false" SourceVersion="Original" />
+                      <Parameter AllowDbNull="false" AutogeneratedName="Id" ColumnName="Id" DataSourceName="[C:\USERS\ALSON\DESKTOP\PROJECTX\PEMIRASERVER\PEMIRASERVER\DB\PEMIRADB.MDF].dbo.KunciPasswords" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@Id" Precision="0" ProviderType="Int" Scale="0" Size="4" SourceColumn="Id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </UpdateCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Id" DataSetColumn="Id" />
+              <Mapping SourceColumn="password" DataSetColumn="password" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -288,7 +344,7 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
   <xs:element name="PemiraDBDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="PemiraDBDataSet" msprop:Generator_UserDSName="PemiraDBDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="DPT" msprop:Generator_TableClassName="DPTDataTable" msprop:Generator_TableVarName="tableDPT" msprop:Generator_TablePropName="DPT" msprop:Generator_RowDeletingName="DPTRowDeleting" msprop:Generator_RowChangingName="DPTRowChanging" msprop:Generator_RowEvHandlerName="DPTRowChangeEventHandler" msprop:Generator_RowDeletedName="DPTRowDeleted" msprop:Generator_UserTableName="DPT" msprop:Generator_RowChangedName="DPTRowChanged" msprop:Generator_RowEvArgName="DPTRowChangeEvent" msprop:Generator_RowClassName="DPTRow">
+        <xs:element name="DPT" msprop:Generator_TableClassName="DPTDataTable" msprop:Generator_TableVarName="tableDPT" msprop:Generator_RowChangedName="DPTRowChanged" msprop:Generator_TablePropName="DPT" msprop:Generator_RowDeletingName="DPTRowDeleting" msprop:Generator_RowChangingName="DPTRowChanging" msprop:Generator_RowEvHandlerName="DPTRowChangeEventHandler" msprop:Generator_RowDeletedName="DPTRowDeleted" msprop:Generator_RowClassName="DPTRow" msprop:Generator_UserTableName="DPT" msprop:Generator_RowEvArgName="DPTRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -311,7 +367,7 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="DPT_staging" msprop:Generator_TableClassName="DPT_stagingDataTable" msprop:Generator_TableVarName="tableDPT_staging" msprop:Generator_TablePropName="DPT_staging" msprop:Generator_RowDeletingName="DPT_stagingRowDeleting" msprop:Generator_RowChangingName="DPT_stagingRowChanging" msprop:Generator_RowEvHandlerName="DPT_stagingRowChangeEventHandler" msprop:Generator_RowDeletedName="DPT_stagingRowDeleted" msprop:Generator_UserTableName="DPT_staging" msprop:Generator_RowChangedName="DPT_stagingRowChanged" msprop:Generator_RowEvArgName="DPT_stagingRowChangeEvent" msprop:Generator_RowClassName="DPT_stagingRow">
+        <xs:element name="DPT_staging" msprop:Generator_TableClassName="DPT_stagingDataTable" msprop:Generator_TableVarName="tableDPT_staging" msprop:Generator_RowChangedName="DPT_stagingRowChanged" msprop:Generator_TablePropName="DPT_staging" msprop:Generator_RowDeletingName="DPT_stagingRowDeleting" msprop:Generator_RowChangingName="DPT_stagingRowChanging" msprop:Generator_RowEvHandlerName="DPT_stagingRowChangeEventHandler" msprop:Generator_RowDeletedName="DPT_stagingRowDeleted" msprop:Generator_RowClassName="DPT_stagingRow" msprop:Generator_UserTableName="DPT_staging" msprop:Generator_RowEvArgName="DPT_stagingRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="nama" msprop:Generator_ColumnVarNameInTable="columnnama" msprop:Generator_ColumnPropNameInRow="nama" msprop:Generator_ColumnPropNameInTable="namaColumn" msprop:Generator_UserColumnName="nama">
@@ -331,7 +387,7 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="ImportStatus" msprop:Generator_TableClassName="ImportStatusDataTable" msprop:Generator_TableVarName="tableImportStatus" msprop:Generator_TablePropName="ImportStatus" msprop:Generator_RowDeletingName="ImportStatusRowDeleting" msprop:Generator_RowChangingName="ImportStatusRowChanging" msprop:Generator_RowEvHandlerName="ImportStatusRowChangeEventHandler" msprop:Generator_RowDeletedName="ImportStatusRowDeleted" msprop:Generator_UserTableName="ImportStatus" msprop:Generator_RowChangedName="ImportStatusRowChanged" msprop:Generator_RowEvArgName="ImportStatusRowChangeEvent" msprop:Generator_RowClassName="ImportStatusRow">
+        <xs:element name="ImportStatus" msprop:Generator_TableClassName="ImportStatusDataTable" msprop:Generator_TableVarName="tableImportStatus" msprop:Generator_RowChangedName="ImportStatusRowChanged" msprop:Generator_TablePropName="ImportStatus" msprop:Generator_RowDeletingName="ImportStatusRowDeleting" msprop:Generator_RowChangingName="ImportStatusRowChanging" msprop:Generator_RowEvHandlerName="ImportStatusRowChangeEventHandler" msprop:Generator_RowDeletedName="ImportStatusRowDeleted" msprop:Generator_RowClassName="ImportStatusRow" msprop:Generator_UserTableName="ImportStatus" msprop:Generator_RowEvArgName="ImportStatusRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Path" msprop:Generator_ColumnVarNameInTable="columnPath" msprop:Generator_ColumnPropNameInRow="Path" msprop:Generator_ColumnPropNameInTable="PathColumn" msprop:Generator_UserColumnName="Path" minOccurs="0">
@@ -341,6 +397,7 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="LastUpdated" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnLastUpdated" msprop:Generator_ColumnPropNameInRow="LastUpdated" msprop:Generator_ColumnPropNameInTable="LastUpdatedColumn" msprop:Generator_UserColumnName="LastUpdated" type="xs:base64Binary" minOccurs="0" />
               <xs:element name="MachineName" msprop:Generator_ColumnVarNameInTable="columnMachineName" msprop:Generator_ColumnPropNameInRow="MachineName" msprop:Generator_ColumnPropNameInTable="MachineNameColumn" msprop:Generator_UserColumnName="MachineName" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -348,17 +405,24 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="LastUpdated" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnLastUpdated" msprop:Generator_ColumnPropNameInRow="LastUpdated" msprop:Generator_ColumnPropNameInTable="LastUpdatedColumn" msprop:Generator_UserColumnName="LastUpdated" minOccurs="0">
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="KunciPasswords" msprop:Generator_TableClassName="KunciPasswordsDataTable" msprop:Generator_TableVarName="tableKunciPasswords" msprop:Generator_RowChangedName="KunciPasswordsRowChanged" msprop:Generator_TablePropName="KunciPasswords" msprop:Generator_RowDeletingName="KunciPasswordsRowDeleting" msprop:Generator_RowChangingName="KunciPasswordsRowChanging" msprop:Generator_RowEvHandlerName="KunciPasswordsRowChangeEventHandler" msprop:Generator_RowDeletedName="KunciPasswordsRowDeleted" msprop:Generator_RowClassName="KunciPasswordsRow" msprop:Generator_UserTableName="KunciPasswords" msprop:Generator_RowEvArgName="KunciPasswordsRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
+              <xs:element name="password" msprop:Generator_ColumnVarNameInTable="columnpassword" msprop:Generator_ColumnPropNameInRow="password" msprop:Generator_ColumnPropNameInTable="passwordColumn" msprop:Generator_UserColumnName="password">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="25" />
+                    <xs:maxLength value="50" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="QBilik1" msprop:Generator_TableClassName="QBilik1DataTable" msprop:Generator_TableVarName="tableQBilik1" msprop:Generator_TablePropName="QBilik1" msprop:Generator_RowDeletingName="QBilik1RowDeleting" msprop:Generator_RowChangingName="QBilik1RowChanging" msprop:Generator_RowEvHandlerName="QBilik1RowChangeEventHandler" msprop:Generator_RowDeletedName="QBilik1RowDeleted" msprop:Generator_UserTableName="QBilik1" msprop:Generator_RowChangedName="QBilik1RowChanged" msprop:Generator_RowEvArgName="QBilik1RowChangeEvent" msprop:Generator_RowClassName="QBilik1Row">
+        <xs:element name="QBilik1" msprop:Generator_TableClassName="QBilik1DataTable" msprop:Generator_TableVarName="tableQBilik1" msprop:Generator_RowChangedName="QBilik1RowChanged" msprop:Generator_TablePropName="QBilik1" msprop:Generator_RowDeletingName="QBilik1RowDeleting" msprop:Generator_RowChangingName="QBilik1RowChanging" msprop:Generator_RowEvHandlerName="QBilik1RowChangeEventHandler" msprop:Generator_RowDeletedName="QBilik1RowDeleted" msprop:Generator_RowClassName="QBilik1Row" msprop:Generator_UserTableName="QBilik1" msprop:Generator_RowEvArgName="QBilik1RowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -372,7 +436,7 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="QBilik2" msprop:Generator_TableClassName="QBilik2DataTable" msprop:Generator_TableVarName="tableQBilik2" msprop:Generator_TablePropName="QBilik2" msprop:Generator_RowDeletingName="QBilik2RowDeleting" msprop:Generator_RowChangingName="QBilik2RowChanging" msprop:Generator_RowEvHandlerName="QBilik2RowChangeEventHandler" msprop:Generator_RowDeletedName="QBilik2RowDeleted" msprop:Generator_UserTableName="QBilik2" msprop:Generator_RowChangedName="QBilik2RowChanged" msprop:Generator_RowEvArgName="QBilik2RowChangeEvent" msprop:Generator_RowClassName="QBilik2Row">
+        <xs:element name="QBilik2" msprop:Generator_TableClassName="QBilik2DataTable" msprop:Generator_TableVarName="tableQBilik2" msprop:Generator_RowChangedName="QBilik2RowChanged" msprop:Generator_TablePropName="QBilik2" msprop:Generator_RowDeletingName="QBilik2RowDeleting" msprop:Generator_RowChangingName="QBilik2RowChanging" msprop:Generator_RowEvHandlerName="QBilik2RowChangeEventHandler" msprop:Generator_RowDeletedName="QBilik2RowDeleted" msprop:Generator_RowClassName="QBilik2Row" msprop:Generator_UserTableName="QBilik2" msprop:Generator_RowEvArgName="QBilik2RowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -386,7 +450,7 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WaitingList" msprop:Generator_TableClassName="WaitingListDataTable" msprop:Generator_TableVarName="tableWaitingList" msprop:Generator_TablePropName="WaitingList" msprop:Generator_RowDeletingName="WaitingListRowDeleting" msprop:Generator_RowChangingName="WaitingListRowChanging" msprop:Generator_RowEvHandlerName="WaitingListRowChangeEventHandler" msprop:Generator_RowDeletedName="WaitingListRowDeleted" msprop:Generator_UserTableName="WaitingList" msprop:Generator_RowChangedName="WaitingListRowChanged" msprop:Generator_RowEvArgName="WaitingListRowChangeEvent" msprop:Generator_RowClassName="WaitingListRow">
+        <xs:element name="WaitingList" msprop:Generator_TableClassName="WaitingListDataTable" msprop:Generator_TableVarName="tableWaitingList" msprop:Generator_RowChangedName="WaitingListRowChanged" msprop:Generator_TablePropName="WaitingList" msprop:Generator_RowDeletingName="WaitingListRowDeleting" msprop:Generator_RowChangingName="WaitingListRowChanging" msprop:Generator_RowEvHandlerName="WaitingListRowChangeEventHandler" msprop:Generator_RowDeletedName="WaitingListRowDeleted" msprop:Generator_RowClassName="WaitingListRow" msprop:Generator_UserTableName="WaitingList" msprop:Generator_RowEvArgName="WaitingListRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -404,6 +468,10 @@ SELECT Id, nim FROM WaitingList WHERE (Id = @Id)</CommandText>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">
       <xs:selector xpath=".//mstns:DPT" />
+      <xs:field xpath="mstns:Id" />
+    </xs:unique>
+    <xs:unique name="KunciPasswords_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:KunciPasswords" />
       <xs:field xpath="mstns:Id" />
     </xs:unique>
     <xs:unique name="QBilik1_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">

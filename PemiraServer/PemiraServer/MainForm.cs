@@ -22,6 +22,7 @@ namespace PemiraServer
         private const int MAXWAITING = 2;
         //private string[] host = { "169.254.1.2", "169.254.1.3" };
         private string[] host = { "127.0.0.1", "127.0.0.1" };
+        private int nPasswords = 5;
 
         private int port = 13514;
         private dbDPTController dbDpt = new dbDPTController();
@@ -29,12 +30,22 @@ namespace PemiraServer
         private dbQBilik2Controller dbQBilik2 = new dbQBilik2Controller();
         private dbWaitingListController dbWaitingList = new dbWaitingListController();
         private dbImportStatusController dbImport = new dbImportStatusController();
-      
+        private dbKunciPasswordsController dbPasswords = new dbKunciPasswordsController();
+
         /*
             Constructors             
         */
         public MainForm()
         {
+            if (dbPasswords.getDataCount() == 0)
+            {
+                for (int i = 1; i <= nPasswords; i++)
+                {
+                    InputPassword ip = new InputPassword(i);
+                    ip.ShowDialog();
+                }
+            }
+            
             InitializeComponent();
             InitializeListView();
             InitializeVariable();
@@ -265,7 +276,7 @@ namespace PemiraServer
                     MessageBox.Show("Nim " + textBoxNIM.Text + " Sudah Pernah Memilih!");
                 }
             } else {
-                MessageBox.Show("Nim " + textBoxNIM.Text + " Tidak Terdaftar di DPT!");
+                MessageBox.Show("Nim " + textBoxNIM.Text + " Tidak Terdaftar di DPT maupun DP!");
             }
         }
 
@@ -408,8 +419,101 @@ namespace PemiraServer
 
         private void exportButton_Click(object sender, EventArgs e)
         {
-            ExportForm ef = new ExportForm();
-            ef.ShowDialog();
+            for (int i = 1; i <= nPasswords; i++)
+            {
+                BukaKunci bk = new BukaKunci(i);
+                bk.ShowDialog();
+                if (bk.getIsCancel())
+                {
+                    break;
+                }
+                else if (i == nPasswords && bk.getIsPasswordTrue())
+                {
+                    var fd = new FolderBrowserDialog();
+                    //fd.InitialDirectory = System.Environment.CurrentDirectory;
+                    //fd.Title = "Please select file to import.";
+                    if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                    {
+                        string selectedPath = fd.SelectedPath;
+
+                        string exportKMname = "KMresults.csv";
+                        string exportMWAWMname = "MWAWMresults.csv";
+
+                        bool isSuccessful = true;
+                        string msg = "";
+                        dbDPTController dbDpt = new dbDPTController();
+                        string pathKM = selectedPath + @"\" + exportKMname;
+                        //Cek apakah berhasil export km
+                        isSuccessful &= dbDpt.exportCSVkm(pathKM);
+                        string pathMWAWM = selectedPath + @"\" + exportMWAWMname;
+                        //Cek apakah berhasil export mwawm
+                        isSuccessful &= dbDpt.exportCSVmwawm(pathMWAWM);
+                        if (isSuccessful)
+                        {
+                            msg += "Export Successful!\n";
+                            msg += "File Exported to: " + selectedPath + "\n";
+                            msg += "File names: " + exportKMname + " and " + exportMWAWMname;
+                        }
+
+                        MessageBox.Show(msg);
+                        this.Close();
+                    }
+                }
+            }
+        }
+
+        private void exportDpButton_Click(object sender, EventArgs e)
+        {
+            var fd = new FolderBrowserDialog();
+            //fd.InitialDirectory = System.Environment.CurrentDirectory;
+            //fd.Title = "Please select file to import.";
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string exportDPname = "DPstatus.csv";
+
+                string selectedPath = fd.SelectedPath;
+                bool isSuccessful = true;
+                string msg = "";
+                dbDPTController dbDpt = new dbDPTController();
+                string pathDp = selectedPath + @"\" + exportDPname;
+                //Cek apakah berhasil export mwawm
+                isSuccessful &= dbDpt.exportCSVdp(pathDp);
+                if (isSuccessful)
+                {
+                    msg += "Export Successful!\n";
+                    msg += "File Exported to: " + selectedPath + "\n";
+                    msg += "File name: " + exportDPname;
+                }
+
+                MessageBox.Show(msg);
+            }
+        }
+
+        private void exportDptButton_Click(object sender, EventArgs e)
+        {
+            var fd = new FolderBrowserDialog();
+            //fd.InitialDirectory = System.Environment.CurrentDirectory;
+            //fd.Title = "Please select file to import.";
+            if (fd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                string exportDPTname = "DPTstatus.csv";
+
+                string selectedPath = fd.SelectedPath;
+                bool isSuccessful = true;
+                string msg = "";
+                dbDPTController dbDpt = new dbDPTController();
+                string pathDpt = selectedPath + @"\" + exportDPTname;
+                //Cek apakah berhasil export mwawm
+                isSuccessful &= dbDpt.exportCSVdpt(pathDpt);
+                if (isSuccessful)
+                {
+                    msg += "Export Successful!\n";
+                    msg += "File Exported to: " + selectedPath + "\n";
+                    msg += "File name: " + exportDPTname;
+                }
+
+                MessageBox.Show(msg);
+            }
         }
     }
 }

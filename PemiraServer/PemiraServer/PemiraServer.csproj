@@ -62,12 +62,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BukaKunci.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BukaKunci.Designer.cs">
+      <DependentUpon>BukaKunci.cs</DependentUpon>
+    </Compile>
     <Compile Include="DB\DbController.cs" />
     <Compile Include="ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputPassword.Designer.cs">
+      <DependentUpon>InputPassword.cs</DependentUpon>
     </Compile>
     <Compile Include="PemiraDBDataSet1.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -86,8 +98,14 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BukaKunci.resx">
+      <DependentUpon>BukaKunci.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputPassword.resx">
+      <DependentUpon>InputPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
