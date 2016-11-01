@@ -90,12 +90,26 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\face_PNG5646.png" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo Keluarga Mahasiswa ITB.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Logo Pemira KM ITB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\m%2801-32%29_gr.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MOST-BEAUTIFUL-FACES.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\face-09.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rexfeatures_5550767em-large_trans++QJoTHvv9hWAiaCwwE8274nuY336Pi7lpxqorZxKT9NA.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

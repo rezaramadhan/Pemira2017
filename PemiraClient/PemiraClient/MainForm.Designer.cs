@@ -50,10 +50,30 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.panel11 = new System.Windows.Forms.Panel();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.pictureBox7 = new System.Windows.Forms.PictureBox();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.pictureBox8 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.GBWelcomeScreen.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -65,17 +85,27 @@
             this.panel6.SuspendLayout();
             this.GBTerimaKasih.SuspendLayout();
             this.panel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.panel7.SuspendLayout();
+            this.panel9.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // GBWelcomeScreen
             // 
             this.GBWelcomeScreen.Controls.Add(this.panel2);
             this.GBWelcomeScreen.Controls.Add(this.panel1);
-            this.GBWelcomeScreen.Location = new System.Drawing.Point(12, 12);
+            this.GBWelcomeScreen.Location = new System.Drawing.Point(741, 6);
             this.GBWelcomeScreen.Name = "GBWelcomeScreen";
             this.GBWelcomeScreen.Size = new System.Drawing.Size(729, 496);
             this.GBWelcomeScreen.TabIndex = 0;
@@ -133,9 +163,12 @@
             // 
             // GBPilihMWA
             // 
+            this.GBPilihMWA.Controls.Add(this.panel10);
+            this.GBPilihMWA.Controls.Add(this.panel9);
+            this.GBPilihMWA.Controls.Add(this.panel7);
             this.GBPilihMWA.Controls.Add(this.panel3);
             this.GBPilihMWA.Controls.Add(this.panel4);
-            this.GBPilihMWA.Location = new System.Drawing.Point(12, 12);
+            this.GBPilihMWA.Location = new System.Drawing.Point(741, 508);
             this.GBPilihMWA.Name = "GBPilihMWA";
             this.GBPilihMWA.Size = new System.Drawing.Size(729, 496);
             this.GBPilihMWA.TabIndex = 2;
@@ -153,6 +186,7 @@
             // labelTimer
             // 
             this.labelTimer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTimer.Location = new System.Drawing.Point(0, 0);
             this.labelTimer.Name = "labelTimer";
             this.labelTimer.Size = new System.Drawing.Size(723, 50);
@@ -195,10 +229,11 @@
             // 
             // GBPilihKetuaKM
             // 
-            this.GBPilihKetuaKM.Controls.Add(this.GBTerimaKasih);
+            this.GBPilihKetuaKM.Controls.Add(this.panel12);
+            this.GBPilihKetuaKM.Controls.Add(this.panel11);
             this.GBPilihKetuaKM.Controls.Add(this.panel5);
             this.GBPilihKetuaKM.Controls.Add(this.panel6);
-            this.GBPilihKetuaKM.Location = new System.Drawing.Point(12, 12);
+            this.GBPilihKetuaKM.Location = new System.Drawing.Point(6, 12);
             this.GBPilihKetuaKM.Name = "GBPilihKetuaKM";
             this.GBPilihKetuaKM.Size = new System.Drawing.Size(729, 496);
             this.GBPilihKetuaKM.TabIndex = 3;
@@ -216,6 +251,7 @@
             // labelTimer2
             // 
             this.labelTimer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTimer2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTimer2.Location = new System.Drawing.Point(0, 0);
             this.labelTimer2.Name = "labelTimer2";
             this.labelTimer2.Size = new System.Drawing.Size(723, 50);
@@ -259,7 +295,7 @@
             // GBTerimaKasih
             // 
             this.GBTerimaKasih.Controls.Add(this.panel8);
-            this.GBTerimaKasih.Location = new System.Drawing.Point(0, 0);
+            this.GBTerimaKasih.Location = new System.Drawing.Point(6, 514);
             this.GBTerimaKasih.Name = "GBTerimaKasih";
             this.GBTerimaKasih.Size = new System.Drawing.Size(729, 496);
             this.GBTerimaKasih.TabIndex = 4;
@@ -297,35 +333,186 @@
             this.label8.Text = "SELAMAT DATANG !";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // pictureBox1
+            // panel7
             // 
-            this.pictureBox1.Image = global::PemiraClient.Properties.Resources.Logo_Pemira_KM_ITB;
-            this.pictureBox1.Location = new System.Drawing.Point(7, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 5;
-            this.pictureBox1.TabStop = false;
+            this.panel7.Controls.Add(this.label9);
+            this.panel7.Controls.Add(this.label2);
+            this.panel7.Controls.Add(this.pictureBox5);
+            this.panel7.Location = new System.Drawing.Point(14, 144);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(200, 290);
+            this.panel7.TabIndex = 1;
             // 
-            // pictureBox2
+            // label2
             // 
-            this.pictureBox2.Image = global::PemiraClient.Properties.Resources.Logo_Keluarga_Mahasiswa_ITB;
-            this.pictureBox2.Location = new System.Drawing.Point(616, 3);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 6;
-            this.pictureBox2.TabStop = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(86, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(25, 25);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "1";
             // 
-            // pictureBox3
+            // label9
             // 
-            this.pictureBox3.Image = global::PemiraClient.Properties.Resources.Logo_Pemira_KM_ITB;
-            this.pictureBox3.Location = new System.Drawing.Point(7, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(25, 227);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(146, 25);
+            this.label9.TabIndex = 1;
+            this.label9.Text = "Lorem Ipsum";
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.label10);
+            this.panel9.Controls.Add(this.label11);
+            this.panel9.Controls.Add(this.pictureBox6);
+            this.panel9.Location = new System.Drawing.Point(269, 144);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(200, 290);
+            this.panel9.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(43, 227);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(103, 25);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Dolor Sit";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(86, 8);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(25, 25);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "2";
+            // 
+            // panel10
+            // 
+            this.panel10.Controls.Add(this.label12);
+            this.panel10.Controls.Add(this.label13);
+            this.panel10.Controls.Add(this.pictureBox7);
+            this.panel10.Location = new System.Drawing.Point(520, 144);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(200, 290);
+            this.panel10.TabIndex = 1;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(41, 227);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(115, 50);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Amet Ver \r\nPericula";
+            this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(86, 8);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(25, 25);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "3";
+            // 
+            // panel11
+            // 
+            this.panel11.Controls.Add(this.label14);
+            this.panel11.Controls.Add(this.label15);
+            this.panel11.Controls.Add(this.pictureBox8);
+            this.panel11.Location = new System.Drawing.Point(157, 144);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(200, 290);
+            this.panel11.TabIndex = 2;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(32, 227);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(136, 25);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Dolores Pro";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(86, 8);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(25, 25);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "1";
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.label16);
+            this.panel12.Controls.Add(this.label17);
+            this.panel12.Controls.Add(this.pictureBox9);
+            this.panel12.Location = new System.Drawing.Point(415, 144);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(200, 290);
+            this.panel12.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(31, 227);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(140, 25);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Fuqit Eripuit";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(86, 8);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(25, 25);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "2";
+            // 
+            // pictureBox7
+            // 
+            this.pictureBox7.Image = global::PemiraClient.Properties.Resources.MOST_BEAUTIFUL_FACES;
+            this.pictureBox7.Location = new System.Drawing.Point(24, 37);
+            this.pictureBox7.Name = "pictureBox7";
+            this.pictureBox7.Size = new System.Drawing.Size(149, 187);
+            this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox7.TabIndex = 0;
+            this.pictureBox7.TabStop = false;
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Image = global::PemiraClient.Properties.Resources.m_01_32__gr;
+            this.pictureBox6.Location = new System.Drawing.Point(24, 37);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(149, 187);
+            this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox6.TabIndex = 0;
+            this.pictureBox6.TabStop = false;
+            // 
+            // pictureBox5
+            // 
+            this.pictureBox5.Image = global::PemiraClient.Properties.Resources.face_PNG5646;
+            this.pictureBox5.Location = new System.Drawing.Point(24, 37);
+            this.pictureBox5.Name = "pictureBox5";
+            this.pictureBox5.Size = new System.Drawing.Size(149, 187);
+            this.pictureBox5.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox5.TabIndex = 0;
+            this.pictureBox5.TabStop = false;
             // 
             // pictureBox4
             // 
@@ -337,13 +524,64 @@
             this.pictureBox4.TabIndex = 7;
             this.pictureBox4.TabStop = false;
             // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::PemiraClient.Properties.Resources.Logo_Pemira_KM_ITB;
+            this.pictureBox3.Location = new System.Drawing.Point(7, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 6;
+            this.pictureBox3.TabStop = false;
+            // 
+            // pictureBox9
+            // 
+            this.pictureBox9.Image = global::PemiraClient.Properties.Resources.rexfeatures_5550767em_large_trans__QJoTHvv9hWAiaCwwE8274nuY336Pi7lpxqorZxKT9NA;
+            this.pictureBox9.Location = new System.Drawing.Point(24, 37);
+            this.pictureBox9.Name = "pictureBox9";
+            this.pictureBox9.Size = new System.Drawing.Size(149, 187);
+            this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox9.TabIndex = 0;
+            this.pictureBox9.TabStop = false;
+            // 
+            // pictureBox8
+            // 
+            this.pictureBox8.Image = global::PemiraClient.Properties.Resources.face_09;
+            this.pictureBox8.Location = new System.Drawing.Point(24, 37);
+            this.pictureBox8.Name = "pictureBox8";
+            this.pictureBox8.Size = new System.Drawing.Size(149, 187);
+            this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox8.TabIndex = 0;
+            this.pictureBox8.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = global::PemiraClient.Properties.Resources.Logo_Keluarga_Mahasiswa_ITB;
+            this.pictureBox2.Location = new System.Drawing.Point(616, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 6;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::PemiraClient.Properties.Resources.Logo_Pemira_KM_ITB;
+            this.pictureBox1.Location = new System.Drawing.Point(7, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 5;
+            this.pictureBox1.TabStop = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(753, 520);
-            this.Controls.Add(this.GBPilihKetuaKM);
+            this.ClientSize = new System.Drawing.Size(742, 518);
+            this.Controls.Add(this.GBTerimaKasih);
             this.Controls.Add(this.GBPilihMWA);
+            this.Controls.Add(this.GBPilihKetuaKM);
             this.Controls.Add(this.GBWelcomeScreen);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MainForm";
@@ -363,10 +601,25 @@
             this.panel6.ResumeLayout(false);
             this.GBTerimaKasih.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.panel7.ResumeLayout(false);
+            this.panel7.PerformLayout();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
+            this.panel10.ResumeLayout(false);
+            this.panel10.PerformLayout();
+            this.panel11.ResumeLayout(false);
+            this.panel11.PerformLayout();
+            this.panel12.ResumeLayout(false);
+            this.panel12.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -399,6 +652,26 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.PictureBox pictureBox7;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.PictureBox pictureBox9;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.PictureBox pictureBox8;
     }
 }
 

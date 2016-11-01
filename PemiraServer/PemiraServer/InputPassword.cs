@@ -51,5 +51,10 @@ namespace PemiraServer
                 this.ActiveControl = passwordTB;
             }
         }
+
+        private void passwordTB_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = okButton;
+        }
     }
 }

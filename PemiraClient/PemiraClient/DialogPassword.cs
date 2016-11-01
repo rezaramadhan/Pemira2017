@@ -12,7 +12,7 @@ namespace PemiraClient
 {
     public partial class DialogPassword : Form
     {
-        public string inputPassword = "ajdlfjghjashdkjfdfkjlsgajsd";
+        public string inputPassword = null;
         public DialogPassword()
         {
             InitializeComponent();
@@ -33,6 +33,11 @@ namespace PemiraClient
         {
             StartPosition = FormStartPosition.CenterScreen;
 
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            AcceptButton = button1;
         }
     }
 }

@@ -82,9 +82,14 @@ namespace PemiraClient
         //[return: MarshalAs(UnmanagedType.Bool)]
         //static extern bool AllocConsole();
         Thread ThreadingServer;
+        
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //killExplorer(); //GALAU MAU PAKE ATAU ENGGA
+            killExplorer(); //GALAU MAU PAKE ATAU ENGGA
+            GBWelcomeScreen.Location = new Point(6, 12);
+            GBTerimaKasih.Location = new Point(6, 12);
+            GBPilihMWA.Location = new Point(6, 12);
+            GBPilihKetuaKM.Location = new Point(6, 12);
             KeyPreview = true;
             ControlBox = false;
             MinimizeBox = false;
@@ -97,6 +102,7 @@ namespace PemiraClient
             //AllocConsole();
             ProcessModule objCurrentModule = Process.GetCurrentProcess().MainModule;
             objKeyboardProcess = new LowLevelKeyboardProc(captureKey);
+            
             ptrHook = SetWindowsHookEx(13, objKeyboardProcess, GetModuleHandle(objCurrentModule.ModuleName), 0);
         }
         /* Code to Disable WinKey, Alt+Tab, Ctrl+Esc Ends Here */
@@ -118,21 +124,27 @@ namespace PemiraClient
             {
                 _altF4Pressed = true;
             }
-            else if ((e.Alt && e.Shift && e.Control && e.KeyCode == Keys.P ))
+            else if ((e.Alt && e.Shift && e.KeyCode == Keys.P ))
             {
                 DialogPassword password = new DialogPassword();
                 password.StartPosition = FormStartPosition.CenterScreen;
                 password.ShowDialog();
-                if (password.inputPassword != "ajdlfjghjashdkjfdfkjlsgajsd")
+                if (password.inputPassword != null)
                 {
-                    if (password.inputPassword == "inipassword")
+                    if (password.inputPassword == "4f86364c3bf3c48600aff71fe70ec7ac")
                     {
+                        var processes = Process.GetProcessesByName("explorer");
+                        foreach (var process in processes)
+                        {
+                            process.Kill();
+                            process.WaitForExit();
+                        }
                         Application.Exit();
                     }
                     else
                     {
                             MessageBox.Show("Password salah !");
-                        }
+                     }
                 }
                 password.Dispose();
             }
@@ -317,10 +329,21 @@ namespace PemiraClient
         private int nPress = -1;
         private void MainForm_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar >= '0' && e.KeyChar <= '9')
+            if (GBPilihKetuaKM.Visible)
             {
-                nPress = e.KeyChar;
+                if (e.KeyChar >= '1' && e.KeyChar <= '2')
+                {
+                    nPress = e.KeyChar;
+                }
             }
+            else if (GBPilihMWA.Visible)
+            {
+                if (e.KeyChar >= '1' && e.KeyChar <= '3')
+                {
+                    nPress = e.KeyChar;
+                }
+            }
+
         }
     }
 }
