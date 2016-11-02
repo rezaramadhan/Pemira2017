@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Diagnostics;
+using System.Windows.Forms;
+
 namespace PemiraServer
 {
     class ServerSocket {
@@ -19,11 +21,11 @@ namespace PemiraServer
         }
 
         public void connect() {
-
             client = new TcpClient();
             client.Connect(host, port);
             netStream = client.GetStream();
             client.ReceiveBufferSize = MAXBUFF;
+            
         }
 
         public void disconnect() {

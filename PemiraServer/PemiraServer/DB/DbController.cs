@@ -89,6 +89,12 @@ namespace PemiraServer
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
         }
+
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
+        }
     }
 
     public class dbImportStatusController
@@ -165,6 +171,11 @@ namespace PemiraServer
                 MessageBox.Show("Query error\nmessage: " + e.Message + "\n\nsource:" + e.Source);
                 return false;
             }
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
     public class dbQBilik2Controller
@@ -258,6 +269,11 @@ namespace PemiraServer
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
         }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
+        }
     }
 
     public class dbQBilik1Controller
@@ -350,6 +366,11 @@ namespace PemiraServer
             }
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
 
@@ -445,6 +466,11 @@ namespace PemiraServer
             }
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
 
@@ -756,6 +782,11 @@ namespace PemiraServer
                 sw.Write(sw.NewLine);
             }
             sw.Close();
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
 }

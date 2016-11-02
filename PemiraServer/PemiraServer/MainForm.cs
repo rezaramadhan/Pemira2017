@@ -37,6 +37,7 @@ namespace PemiraServer
         */
         public MainForm()
         {
+            //Minta Password
             if (dbPasswords.getDataCount() == 0)
             {
                 for (int i = 1; i <= nPasswords; i++)
@@ -81,17 +82,23 @@ namespace PemiraServer
         private void InitializeQueue() {
             loadQueueFromDB();
             string s;
-
-            while (listViewBilik1.Items.Count < 2) {
-                s = listViewWaiting.Items[0].Text;
-                listViewBilik1.Items.Add(s);
-                listViewWaiting.Items.RemoveAt(0);
+            if (listViewWaiting.Items.Count > 0)
+            {
+                while (listViewBilik1.Items.Count < 2)
+                {
+                    s = listViewWaiting.Items[0].Text;
+                    listViewBilik1.Items.Add(s);
+                    listViewWaiting.Items.RemoveAt(0);
+                }
             }
-
-            while (listViewBilik2.Items.Count < 2) {
-                s = listViewWaiting.Items[0].Text;
-                listViewBilik2.Items.Add(s);
-                listViewWaiting.Items.RemoveAt(0);
+            if (listViewWaiting.Items.Count > 0)
+            {
+                while (listViewBilik2.Items.Count < 2)
+                {
+                    s = listViewWaiting.Items[0].Text;
+                    listViewBilik2.Items.Add(s);
+                    listViewWaiting.Items.RemoveAt(0);
+                }
             }
         }
 
