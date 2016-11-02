@@ -51,7 +51,7 @@ namespace PemiraServer
             InitializeListView();
             InitializeVariable();
             InitializeQueue();
-            //dbDpt.importCSV("E:/MOCKss.csv");
+            dbDpt.importCSV("E:/MOCKss.csv");
             //dbDpt.printDB();
             //dbDpt.exportCSVmwawm("E:/MWA.csv");
             //dbDpt.exportCSVkm("E:/K3M.csv");
@@ -322,20 +322,28 @@ namespace PemiraServer
                 {
                     dbDpt.setChoiceKM(listNIM.Items[0].Text, "999");
                 }
+
                 source.Enabled = false;
                 time[idx].Start();
-                sock[idx].connect();
-                Thread trd = new Thread(TCPrecv);
-                trd.Start(idx);
+                try {
+                    sock[idx].connect();
+                    Thread trd = new Thread(TCPrecv);
+                    trd.Start(idx);
 
-                string NIM = listNIM.Items[0].Text;
-                string data;
-                if (isTwice[idx]) {
-                    data = NIM + ",y";
-                } else {
-                    data = NIM + ",n";
+                    string NIM = listNIM.Items[0].Text;
+                    string data = "13514107,y";
+                    if (isTwice[idx]) {
+                        data = NIM + ",y";
+                    } else {
+                        data = NIM + ",n";
+                    }
+                    sock[idx].send(data);
+                } catch (Exception excp) {
+                    time[idx].Stop();
+                    time[idx].reset();
+                    source.Enabled = true;
+                    MessageBox.Show("Client is not connected!");
                 }
-                sock[idx].send(data);
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
@@ -375,9 +383,12 @@ namespace PemiraServer
 
             // Timer's empty, stop
             if (count <= 0) {
-                sock[idx].send("({timeout})");
-                //add to DB
-
+                try {
+                    sock[idx].send("({timeout})");
+                    //add to DB
+                } catch (IOException excpt) {
+                    MessageBox.Show("Client disconnected!");
+                }
 
                 if (isTwice[idx]) {
                     t.counter = TimerCountdown.MAXCOUNT;
@@ -401,8 +412,15 @@ namespace PemiraServer
                     STOP_VOTE(listNIM, bGrant, t, lTimer);
                 }
             } else {
-                data = "({" + count.ToString() + "})";
-                sock[idx].send(data);
+                try {
+                    data = "({" + count.ToString() + "})";
+                    sock[idx].send(data);
+                } catch (IOException excp) {
+                    t.Stop();
+                    t.reset();
+                    bGrant.Enabled = true;
+                    MessageBox.Show("Client disconnected!");
+                }
             }
         }
 

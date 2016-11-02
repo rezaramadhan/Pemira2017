@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 using System.Diagnostics;
 using System.Windows.Forms;
+using System.IO;
 
 namespace PemiraServer
 {
@@ -25,7 +26,7 @@ namespace PemiraServer
             client.Connect(host, port);
             netStream = client.GetStream();
             client.ReceiveBufferSize = MAXBUFF;
-            
+           
         }
 
         public void disconnect() {
@@ -35,10 +36,13 @@ namespace PemiraServer
         }
 
         public void send(string s) {
-            Debug.WriteLine("Send: " + s);
-            byte[] outStream = Encoding.ASCII.GetBytes(s);
-            netStream.Write(outStream, 0, outStream.Length);
-
+            try {
+                Debug.WriteLine("Send: " + s);
+                byte[] outStream = Encoding.ASCII.GetBytes(s);
+                netStream.Write(outStream, 0, outStream.Length);
+            } catch (NullReferenceException e) {
+                MessageBox.Show("Client is not connected!");
+            }
         }
 
         public string recv() {
