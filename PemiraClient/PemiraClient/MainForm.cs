@@ -85,7 +85,7 @@ namespace PemiraClient
         
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //killExplorer(); //GALAU MAU PAKE ATAU ENGGA
+            killExplorer(); //GALAU MAU PAKE ATAU ENGGA
             GBWelcomeScreen.Location = new Point(6, 12);
             GBTerimaKasih.Location = new Point(6, 12);
             GBPilihMWA.Location = new Point(6, 12);
