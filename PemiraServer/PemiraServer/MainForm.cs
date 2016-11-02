@@ -20,8 +20,8 @@ namespace PemiraServer
         private bool[] isTwice;
         private bool[] isS1;
         private const int MAXWAITING = 2;
-        //private string[] host = { "169.254.1.2", "169.254.1.3" };
-        private string[] host = { "127.0.0.1", "127.0.0.1" };
+        private string[] host = { "169.254.1.1", "169.254.1.3" };
+        //private string[] host = { "127.0.0.1", "127.0.0.1" };
         private int nPasswords = 5;
 
         private int port = 13514;
@@ -327,15 +327,16 @@ namespace PemiraServer
                     sock[idx].connect();
                     Thread trd = new Thread(TCPrecv);
                     trd.Start(idx);
-
                     string NIM = listNIM.Items[0].Text;
-                    string data = "13514107,y";
+                    string data = "";
                     if (isTwice[idx]) {
                         data = NIM + ",y";
                     } else {
                         data = NIM + ",n";
                     }
                     sock[idx].send(data);
+                    Thread.Sleep(3000);
+
                 } catch (Exception excp) {
                     time[idx].Stop();
                     time[idx].reset();
