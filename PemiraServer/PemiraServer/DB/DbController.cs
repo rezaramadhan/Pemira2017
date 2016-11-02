@@ -505,7 +505,7 @@ namespace PemiraServer
             {
                 dptTableAdapter.FillByDPT(dtRaw);
                 DataView dv = new DataView(dtRaw);
-                dtExport = dv.ToTable(false, "nama", "nim");
+                dtExport = dv.ToTable(false, "nama", "nim", "sudahPilih");
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
@@ -535,7 +535,7 @@ namespace PemiraServer
             {
                 dptTableAdapter.Fill(dtRaw);
                 DataView dv = new DataView(dtRaw);
-                dtExport = dv.ToTable(false, "nama", "nim");
+                dtExport = dv.ToTable(false, "nama", "nim", "sudahPilih");
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
@@ -707,7 +707,7 @@ namespace PemiraServer
             return (foundRows[0].Field<int>("nomorPilihanMWAWM") != 0);
         }
 
-        /*public void setAlreadyPicked(string nim, bool isAlreadyPicked)
+        public void setSudahPilih(string nim, bool isAlreadyPicked)
         {
             string sAlreadyPicked;
             if (isAlreadyPicked)
@@ -718,10 +718,25 @@ namespace PemiraServer
             {
                 sAlreadyPicked = "0";
             }
-            string query = @"UPDATE DPT SET isSudahPilih = " + sAlreadyPicked + " WHERE nim = '" + nim + "'";
+            string query = @"UPDATE DPT SET SudahPilih = " + sAlreadyPicked + " WHERE nim = '" + nim + "'";
             this.execute(query);
             dptTableAdapter.Fill(dt);
-        }*/
+        }
+
+        public bool getSudahPilih(string nim)
+        {
+            string find = "nim = '" + nim + "'";
+            DataRow[] foundRows = dt.Select(find);
+            if ((string)foundRows[0]["sudahPilih"] == "0")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+            return false;
+        }
 
         public void setChoiceKM(string nim, string nomorPilihanKM)
         {

@@ -186,8 +186,6 @@ namespace PemiraServer
 
             lTimer.Text = TimerCountdown.MAXCOUNT.ToString();
 
-            dbDpt.printDB();
-
         }
 
         private void ACCEPT_VOTE(string[] args, int i) {
@@ -401,6 +399,7 @@ namespace PemiraServer
                 } else {
                     sock[idx].disconnect();
                     //tandain NIM x udah vote di database
+                    dbDpt.setSudahPilih(listNIM.Items.ToString(), true);
                     if (isS1[idx])
                     {
                         dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
