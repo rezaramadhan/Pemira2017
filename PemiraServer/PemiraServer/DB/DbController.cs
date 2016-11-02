@@ -695,7 +695,7 @@ namespace PemiraServer
             //nim harus sudah ada dalam db
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
-            return (foundRows[0].Field<int>("nomorPilihanKM") != 0);
+            return (foundRows[0].Field<int>("nomorPilihanKM").ToString() != "999");
         }
 
         public bool isAlreadyPickedMWAWM(string nim)
@@ -704,7 +704,7 @@ namespace PemiraServer
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
 
-            return (foundRows[0].Field<int>("nomorPilihanMWAWM") != 0);
+            return (foundRows[0].Field<int>("nomorPilihanMWAWM").ToString() != "999");
         }
 
         public void setSudahPilih(string nim, bool isAlreadyPicked)
@@ -735,19 +735,18 @@ namespace PemiraServer
             {
                 return true;
             }
-            return false;
         }
 
         public void setChoiceKM(string nim, string nomorPilihanKM)
         {
-            string query = @"UPDATE DPT SET nomorPilihanKM = " + nomorPilihanKM + " WHERE nim = '" + nim + "'";
+            string query = @"UPDATE DPT SET nomorPilihanKM = '" + nomorPilihanKM + "' WHERE nim = '" + nim + "'";
             this.execute(query);
             dptTableAdapter.Fill(dt);
         }
 
         public void setChoiceMWAWM(string nim, string nomorPilihanKM)
         {
-            string query = @"UPDATE DPT SET nomorPilihanMWAWM = " + nomorPilihanKM + " WHERE nim = '" + nim + "'";
+            string query = @"UPDATE DPT SET nomorPilihanMWAWM = '" + nomorPilihanKM + "' WHERE nim = '" + nim + "'";
             this.execute(query);
             dptTableAdapter.Fill(dt);
         }
@@ -789,8 +788,15 @@ namespace PemiraServer
             {
                 for (int i = 0; i < icolcount; i++)
                 {
-                    if (!Convert.IsDBNull(drow[i]))
-                        sw.Write(drow[i].ToString());
+                    if (!Convert.IsDBNull(drow[i]) && (drow[i].ToString().ToUpper() != "FALSE"))
+                        if(drow[i].ToString().ToUpper() == "TRUE")
+                        {
+                            sw.Write("1");
+                        }
+                        else
+                        {
+                            sw.Write(drow[i].ToString());
+                        }
                     if (i < icolcount - 1)
                         sw.Write(seperator);
                 }

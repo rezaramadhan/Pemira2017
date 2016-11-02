@@ -51,7 +51,7 @@ namespace PemiraServer
             InitializeListView();
             InitializeVariable();
             InitializeQueue();
-            dbDpt.importCSV("E:/MOCKss.csv");
+            //dbDpt.importCSV("E:/MOCKss.csv");
             //dbDpt.printDB();
             //dbDpt.exportCSVmwawm("E:/MWA.csv");
             //dbDpt.exportCSVkm("E:/K3M.csv");
@@ -395,18 +395,18 @@ namespace PemiraServer
                     isTwice[idx] = false;
                     t.Stop();
                     t.reset();
-                    dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "999");
+                    dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "A");
                 } else {
                     sock[idx].disconnect();
                     //tandain NIM x udah vote di database
                     dbDpt.setSudahPilih(listNIM.Items.ToString(), true);
                     if (isS1[idx])
                     {
-                        dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
+                        dbDpt.setChoiceKM(listNIM.Items.ToString(), "A");
                     }
                     else
                     {
-                        dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "999");
+                        dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "A");
                     }
                     STOP_VOTE(listNIM, bGrant, t, lTimer);
                 }
@@ -480,7 +480,7 @@ namespace PemiraServer
                         }
 
                         MessageBox.Show(msg);
-                        this.Close();
+                        //this.Close();
                     }
                 }
             }

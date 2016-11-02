@@ -619,7 +619,7 @@ namespace PemiraServer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public DPTRow AddDPTRow(string nama, string nim, int nomorPilihanKM, int nomorPilihanMWAWM, bool sudahPilih) {
+            public DPTRow AddDPTRow(string nama, string nim, string nomorPilihanKM, string nomorPilihanMWAWM, bool sudahPilih) {
                 DPTRow rowDPTRow = ((DPTRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
@@ -674,9 +674,9 @@ namespace PemiraServer {
                 base.Columns.Add(this.columnnama);
                 this.columnnim = new global::System.Data.DataColumn("nim", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnim);
-                this.columnnomorPilihanKM = new global::System.Data.DataColumn("nomorPilihanKM", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnnomorPilihanKM = new global::System.Data.DataColumn("nomorPilihanKM", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnomorPilihanKM);
-                this.columnnomorPilihanMWAWM = new global::System.Data.DataColumn("nomorPilihanMWAWM", typeof(int), null, global::System.Data.MappingType.Element);
+                this.columnnomorPilihanMWAWM = new global::System.Data.DataColumn("nomorPilihanMWAWM", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnnomorPilihanMWAWM);
                 this.columnsudahPilih = new global::System.Data.DataColumn("sudahPilih", typeof(bool), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnsudahPilih);
@@ -693,7 +693,9 @@ namespace PemiraServer {
                 this.columnnim.AllowDBNull = false;
                 this.columnnim.MaxLength = 8;
                 this.columnnomorPilihanKM.AllowDBNull = false;
+                this.columnnomorPilihanKM.MaxLength = 50;
                 this.columnnomorPilihanMWAWM.AllowDBNull = false;
+                this.columnnomorPilihanMWAWM.MaxLength = 50;
                 this.columnsudahPilih.AllowDBNull = false;
             }
             
@@ -2525,9 +2527,9 @@ namespace PemiraServer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int nomorPilihanKM {
+            public string nomorPilihanKM {
                 get {
-                    return ((int)(this[this.tableDPT.nomorPilihanKMColumn]));
+                    return ((string)(this[this.tableDPT.nomorPilihanKMColumn]));
                 }
                 set {
                     this[this.tableDPT.nomorPilihanKMColumn] = value;
@@ -2536,9 +2538,9 @@ namespace PemiraServer {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public int nomorPilihanMWAWM {
+            public string nomorPilihanMWAWM {
                 get {
-                    return ((int)(this[this.tableDPT.nomorPilihanMWAWMColumn]));
+                    return ((string)(this[this.tableDPT.nomorPilihanMWAWMColumn]));
                 }
                 set {
                     this[this.tableDPT.nomorPilihanMWAWMColumn] = value;
@@ -3218,8 +3220,8 @@ namespace PemiraServer.PemiraDBDataSetTableAdapters {
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nama", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nama", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nim", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nim", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanKM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanMWAWM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanKM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanMWAWM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sudahPilih", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sudahPilih", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
@@ -3228,8 +3230,8 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nama", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nama", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nim", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nim", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanKM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanMWAWM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanKM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanMWAWM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sudahPilih", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sudahPilih", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
@@ -3238,14 +3240,14 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nama", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nama", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nim", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nim", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanKM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanMWAWM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanKM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@nomorPilihanMWAWM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@sudahPilih", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sudahPilih", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_Id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nama", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nama", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nim", global::System.Data.SqlDbType.NChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nim", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanKM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
-            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanMWAWM", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanKM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanKM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_nomorPilihanMWAWM", global::System.Data.SqlDbType.VarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "nomorPilihanMWAWM", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_sudahPilih", global::System.Data.SqlDbType.Bit, 0, global::System.Data.ParameterDirection.Input, 0, 0, "sudahPilih", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Id", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "Id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
@@ -3273,13 +3275,13 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             this._commandCollection[2] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[2].Connection = this.Connection;
             this._commandCollection[2].CommandText = "SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM dbo.DPT " +
-                "WHERE ((nomorPilihanKM <> 0) AND (nomorPilihanKM <> 999)) ORDER BY NEWID()";
+                "WHERE ((nomorPilihanKM <> \'0\') AND (nomorPilihanKM <> \'999\')) ORDER BY NEWID()";
             this._commandCollection[2].CommandType = global::System.Data.CommandType.Text;
             this._commandCollection[3] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[3].Connection = this.Connection;
             this._commandCollection[3].CommandText = "SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM dbo.DPT " +
-                "WHERE ((nomorPilihanMWAWM <> 0) AND (nomorPilihanMWAWM <> 999)) ORDER BY NEWID()" +
-                "";
+                "WHERE ((nomorPilihanMWAWM <> \'0\') AND (nomorPilihanMWAWM <> \'999\')) ORDER BY NEW" +
+                "ID()";
             this._commandCollection[3].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -3412,7 +3414,7 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_Id, string Original_nama, string Original_nim, int Original_nomorPilihanKM, int Original_nomorPilihanMWAWM, bool Original_sudahPilih) {
+        public virtual int Delete(int Original_Id, string Original_nama, string Original_nim, string Original_nomorPilihanKM, string Original_nomorPilihanMWAWM, bool Original_sudahPilih) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_Id));
             if ((Original_nama == null)) {
                 throw new global::System.ArgumentNullException("Original_nama");
@@ -3426,8 +3428,18 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             else {
                 this.Adapter.DeleteCommand.Parameters[2].Value = ((string)(Original_nim));
             }
-            this.Adapter.DeleteCommand.Parameters[3].Value = ((int)(Original_nomorPilihanKM));
-            this.Adapter.DeleteCommand.Parameters[4].Value = ((int)(Original_nomorPilihanMWAWM));
+            if ((Original_nomorPilihanKM == null)) {
+                throw new global::System.ArgumentNullException("Original_nomorPilihanKM");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((string)(Original_nomorPilihanKM));
+            }
+            if ((Original_nomorPilihanMWAWM == null)) {
+                throw new global::System.ArgumentNullException("Original_nomorPilihanMWAWM");
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_nomorPilihanMWAWM));
+            }
             this.Adapter.DeleteCommand.Parameters[5].Value = ((bool)(Original_sudahPilih));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3449,7 +3461,7 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(string nama, string nim, int nomorPilihanKM, int nomorPilihanMWAWM, bool sudahPilih) {
+        public virtual int Insert(string nama, string nim, string nomorPilihanKM, string nomorPilihanMWAWM, bool sudahPilih) {
             if ((nama == null)) {
                 throw new global::System.ArgumentNullException("nama");
             }
@@ -3462,8 +3474,18 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             else {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(nim));
             }
-            this.Adapter.InsertCommand.Parameters[2].Value = ((int)(nomorPilihanKM));
-            this.Adapter.InsertCommand.Parameters[3].Value = ((int)(nomorPilihanMWAWM));
+            if ((nomorPilihanKM == null)) {
+                throw new global::System.ArgumentNullException("nomorPilihanKM");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[2].Value = ((string)(nomorPilihanKM));
+            }
+            if ((nomorPilihanMWAWM == null)) {
+                throw new global::System.ArgumentNullException("nomorPilihanMWAWM");
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(nomorPilihanMWAWM));
+            }
             this.Adapter.InsertCommand.Parameters[4].Value = ((bool)(sudahPilih));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
@@ -3485,7 +3507,7 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string nama, string nim, int nomorPilihanKM, int nomorPilihanMWAWM, bool sudahPilih, int Original_Id, string Original_nama, string Original_nim, int Original_nomorPilihanKM, int Original_nomorPilihanMWAWM, bool Original_sudahPilih, int Id) {
+        public virtual int Update(string nama, string nim, string nomorPilihanKM, string nomorPilihanMWAWM, bool sudahPilih, int Original_Id, string Original_nama, string Original_nim, string Original_nomorPilihanKM, string Original_nomorPilihanMWAWM, bool Original_sudahPilih, int Id) {
             if ((nama == null)) {
                 throw new global::System.ArgumentNullException("nama");
             }
@@ -3498,8 +3520,18 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             else {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(nim));
             }
-            this.Adapter.UpdateCommand.Parameters[2].Value = ((int)(nomorPilihanKM));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(nomorPilihanMWAWM));
+            if ((nomorPilihanKM == null)) {
+                throw new global::System.ArgumentNullException("nomorPilihanKM");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[2].Value = ((string)(nomorPilihanKM));
+            }
+            if ((nomorPilihanMWAWM == null)) {
+                throw new global::System.ArgumentNullException("nomorPilihanMWAWM");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(nomorPilihanMWAWM));
+            }
             this.Adapter.UpdateCommand.Parameters[4].Value = ((bool)(sudahPilih));
             this.Adapter.UpdateCommand.Parameters[5].Value = ((int)(Original_Id));
             if ((Original_nama == null)) {
@@ -3514,8 +3546,18 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
             else {
                 this.Adapter.UpdateCommand.Parameters[7].Value = ((string)(Original_nim));
             }
-            this.Adapter.UpdateCommand.Parameters[8].Value = ((int)(Original_nomorPilihanKM));
-            this.Adapter.UpdateCommand.Parameters[9].Value = ((int)(Original_nomorPilihanMWAWM));
+            if ((Original_nomorPilihanKM == null)) {
+                throw new global::System.ArgumentNullException("Original_nomorPilihanKM");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_nomorPilihanKM));
+            }
+            if ((Original_nomorPilihanMWAWM == null)) {
+                throw new global::System.ArgumentNullException("Original_nomorPilihanMWAWM");
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[9].Value = ((string)(Original_nomorPilihanMWAWM));
+            }
             this.Adapter.UpdateCommand.Parameters[10].Value = ((bool)(Original_sudahPilih));
             this.Adapter.UpdateCommand.Parameters[11].Value = ((int)(Id));
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
@@ -3538,7 +3580,7 @@ SELECT Id, nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih FROM DPT WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string nama, string nim, int nomorPilihanKM, int nomorPilihanMWAWM, bool sudahPilih, int Original_Id, string Original_nama, string Original_nim, int Original_nomorPilihanKM, int Original_nomorPilihanMWAWM, bool Original_sudahPilih) {
+        public virtual int Update(string nama, string nim, string nomorPilihanKM, string nomorPilihanMWAWM, bool sudahPilih, int Original_Id, string Original_nama, string Original_nim, string Original_nomorPilihanKM, string Original_nomorPilihanMWAWM, bool Original_sudahPilih) {
             return this.Update(nama, nim, nomorPilihanKM, nomorPilihanMWAWM, sudahPilih, Original_Id, Original_nama, Original_nim, Original_nomorPilihanKM, Original_nomorPilihanMWAWM, Original_sudahPilih, Original_Id);
         }
     }
