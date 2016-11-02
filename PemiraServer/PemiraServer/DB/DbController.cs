@@ -563,7 +563,7 @@ namespace PemiraServer
             DataTable dtExport = new DataTable();
             try
             {
-                //dptTableAdapter.FillRandomKM(dtRandom);
+                dptTableAdapter.FillRandomKM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
                 //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanKM");
@@ -597,7 +597,7 @@ namespace PemiraServer
             DataTable dtExport = new DataTable();
             try
             {
-                //dptTableAdapter.FillRandomMWAWM(dtRandom);
+                dptTableAdapter.FillRandomMWAWM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
                 //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanMWAWM");
