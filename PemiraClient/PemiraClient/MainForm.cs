@@ -139,6 +139,8 @@ namespace PemiraClient
                             process.Kill();
                             process.WaitForExit();
                         }
+                        //Process.Start("explorer.exe");
+                        Process.Start(Path.Combine(Environment.GetEnvironmentVariable("windir"), "explorer.exe"));
                         Application.Exit();
                     }
                     else
@@ -159,7 +161,8 @@ namespace PemiraClient
 
         //Declare and Initialize the IP Adress
         //static IPAddress ipAd = IPAddress.Parse("192.168.43.90");
-        static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+        //static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+        static IPAddress ipAd = IPAddress.Parse("169.254.1.1");
         //static IPAddress ipAd = IPAddress.Parse("167.205.66.210");
         //Declare and Initilize the Port Number;
         static int PortNumber = 13514;
@@ -197,7 +200,7 @@ namespace PemiraClient
             Debug.WriteLine(firstRead[0]);
             Debug.WriteLine(firstRead[1]);
             Invoke(DelegateTeste_ModifyText, firstRead[0],labelNIM);
-            System.Threading.Thread.Sleep(500);
+            System.Threading.Thread.Sleep(3000);
             Invoke(changeGB, GBPilihMWA);
             while (true)
             {
@@ -315,7 +318,7 @@ namespace PemiraClient
                     Debug.WriteLine(firstRead[0]);
                     Debug.WriteLine(firstRead[1]);
                     Invoke(DelegateTeste_ModifyText, firstRead[0],labelNIM);
-                    System.Threading.Thread.Sleep(500);
+                    System.Threading.Thread.Sleep(3000);
                     Invoke(changeGB, GBPilihMWA);
                 }
 
