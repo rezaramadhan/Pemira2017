@@ -89,6 +89,12 @@ namespace PemiraServer
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
         }
+
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
+        }
     }
 
     public class dbImportStatusController
@@ -165,6 +171,11 @@ namespace PemiraServer
                 MessageBox.Show("Query error\nmessage: " + e.Message + "\n\nsource:" + e.Source);
                 return false;
             }
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
     public class dbQBilik2Controller
@@ -258,6 +269,11 @@ namespace PemiraServer
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
         }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
+        }
     }
 
     public class dbQBilik1Controller
@@ -350,6 +366,11 @@ namespace PemiraServer
             }
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
 
@@ -446,6 +467,11 @@ namespace PemiraServer
             printOut += "Size: " + dt.Rows.Count;
             MessageBox.Show(printOut);
         }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
+        }
     }
 
     public class dbDPTController
@@ -479,7 +505,7 @@ namespace PemiraServer
             {
                 dptTableAdapter.FillByDPT(dtRaw);
                 DataView dv = new DataView(dtRaw);
-                dtExport = dv.ToTable(false, "nama", "nim");
+                dtExport = dv.ToTable(false, "nama", "nim", "sudahPilih");
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
@@ -509,7 +535,7 @@ namespace PemiraServer
             {
                 dptTableAdapter.Fill(dtRaw);
                 DataView dv = new DataView(dtRaw);
-                dtExport = dv.ToTable(false, "nama", "nim");
+                dtExport = dv.ToTable(false, "nama", "nim", "sudahPilih");
                 try
                 {
                     WriteToFile(dtExport, path, false, ",");
@@ -537,7 +563,7 @@ namespace PemiraServer
             DataTable dtExport = new DataTable();
             try
             {
-                //dptTableAdapter.FillRandomKM(dtRandom);
+                dptTableAdapter.FillRandomKM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
                 //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanKM");
@@ -571,7 +597,7 @@ namespace PemiraServer
             DataTable dtExport = new DataTable();
             try
             {
-                //dptTableAdapter.FillRandomMWAWM(dtRandom);
+                dptTableAdapter.FillRandomMWAWM(dtRandom);
                 DataView dv = new DataView(dtRandom);
                 //DATA LENGKAP:
                 //dtExport = dv.ToTable(false, "nim", "nama", "nomorPilihanMWAWM");
@@ -669,7 +695,7 @@ namespace PemiraServer
             //nim harus sudah ada dalam db
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
-            return (foundRows[0].Field<int>("nomorPilihanKM") != 0);
+            return (foundRows[0].Field<int>("nomorPilihanKM").ToString() != "999");
         }
 
         public bool isAlreadyPickedMWAWM(string nim)
@@ -678,10 +704,10 @@ namespace PemiraServer
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
 
-            return (foundRows[0].Field<int>("nomorPilihanMWAWM") != 0);
+            return (foundRows[0].Field<int>("nomorPilihanMWAWM").ToString() != "999");
         }
 
-        /*public void setAlreadyPicked(string nim, bool isAlreadyPicked)
+        public void setSudahPilih(string nim, bool isAlreadyPicked)
         {
             string sAlreadyPicked;
             if (isAlreadyPicked)
@@ -692,21 +718,35 @@ namespace PemiraServer
             {
                 sAlreadyPicked = "0";
             }
-            string query = @"UPDATE DPT SET isSudahPilih = " + sAlreadyPicked + " WHERE nim = '" + nim + "'";
+            string query = @"UPDATE DPT SET SudahPilih = " + sAlreadyPicked + " WHERE nim = '" + nim + "'";
             this.execute(query);
             dptTableAdapter.Fill(dt);
-        }*/
+        }
+
+        public bool getSudahPilih(string nim)
+        {
+            string find = "nim = '" + nim + "'";
+            DataRow[] foundRows = dt.Select(find);
+            if ((string)foundRows[0]["sudahPilih"] == "0")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
 
         public void setChoiceKM(string nim, string nomorPilihanKM)
         {
-            string query = @"UPDATE DPT SET nomorPilihanKM = " + nomorPilihanKM + " WHERE nim = '" + nim + "'";
+            string query = @"UPDATE DPT SET nomorPilihanKM = '" + nomorPilihanKM + "' WHERE nim = '" + nim + "'";
             this.execute(query);
             dptTableAdapter.Fill(dt);
         }
 
         public void setChoiceMWAWM(string nim, string nomorPilihanKM)
         {
-            string query = @"UPDATE DPT SET nomorPilihanMWAWM = " + nomorPilihanKM + " WHERE nim = '" + nim + "'";
+            string query = @"UPDATE DPT SET nomorPilihanMWAWM = '" + nomorPilihanKM + "' WHERE nim = '" + nim + "'";
             this.execute(query);
             dptTableAdapter.Fill(dt);
         }
@@ -748,14 +788,26 @@ namespace PemiraServer
             {
                 for (int i = 0; i < icolcount; i++)
                 {
-                    if (!Convert.IsDBNull(drow[i]))
-                        sw.Write(drow[i].ToString());
+                    if (!Convert.IsDBNull(drow[i]) && (drow[i].ToString().ToUpper() != "FALSE"))
+                        if(drow[i].ToString().ToUpper() == "TRUE")
+                        {
+                            sw.Write("1");
+                        }
+                        else
+                        {
+                            sw.Write(drow[i].ToString());
+                        }
                     if (i < icolcount - 1)
                         sw.Write(seperator);
                 }
                 sw.Write(sw.NewLine);
             }
             sw.Close();
+        }
+        public void flush()
+        {
+            string query = @"TUNCATE TABLE KunciPasswords";
+            this.execute(query);
         }
     }
 }

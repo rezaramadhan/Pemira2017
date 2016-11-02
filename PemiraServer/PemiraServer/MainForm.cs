@@ -20,8 +20,8 @@ namespace PemiraServer
         private bool[] isTwice;
         private bool[] isS1;
         private const int MAXWAITING = 2;
-        //private string[] host = { "169.254.1.2", "169.254.1.3" };
-        private string[] host = { "127.0.0.1", "127.0.0.1" };
+        private string[] host = { "169.254.1.1", "169.254.1.3" };
+        //private string[] host = { "127.0.0.1", "127.0.0.1" };
         private int nPasswords = 5;
 
         private int port = 13514;
@@ -37,6 +37,7 @@ namespace PemiraServer
         */
         public MainForm()
         {
+            //Minta Password
             if (dbPasswords.getDataCount() == 0)
             {
                 for (int i = 1; i <= nPasswords; i++)
@@ -81,17 +82,23 @@ namespace PemiraServer
         private void InitializeQueue() {
             loadQueueFromDB();
             string s;
-
-            while (listViewBilik1.Items.Count < 2) {
-                s = listViewWaiting.Items[0].Text;
-                listViewBilik1.Items.Add(s);
-                listViewWaiting.Items.RemoveAt(0);
+            if (listViewWaiting.Items.Count > 0)
+            {
+                while (listViewBilik1.Items.Count < 2)
+                {
+                    s = listViewWaiting.Items[0].Text;
+                    listViewBilik1.Items.Add(s);
+                    listViewWaiting.Items.RemoveAt(0);
+                }
             }
-
-            while (listViewBilik2.Items.Count < 2) {
-                s = listViewWaiting.Items[0].Text;
-                listViewBilik2.Items.Add(s);
-                listViewWaiting.Items.RemoveAt(0);
+            if (listViewWaiting.Items.Count > 0)
+            {
+                while (listViewBilik2.Items.Count < 2)
+                {
+                    s = listViewWaiting.Items[0].Text;
+                    listViewBilik2.Items.Add(s);
+                    listViewWaiting.Items.RemoveAt(0);
+                }
             }
         }
 
@@ -178,8 +185,6 @@ namespace PemiraServer
             t.reset();
 
             lTimer.Text = TimerCountdown.MAXCOUNT.ToString();
-
-            dbDpt.printDB();
 
         }
 
@@ -315,20 +320,29 @@ namespace PemiraServer
                 {
                     dbDpt.setChoiceKM(listNIM.Items[0].Text, "999");
                 }
+
                 source.Enabled = false;
                 time[idx].Start();
-                sock[idx].connect();
-                Thread trd = new Thread(TCPrecv);
-                trd.Start(idx);
+                try {
+                    sock[idx].connect();
+                    Thread trd = new Thread(TCPrecv);
+                    trd.Start(idx);
+                    string NIM = listNIM.Items[0].Text;
+                    string data = "";
+                    if (isTwice[idx]) {
+                        data = NIM + ",y";
+                    } else {
+                        data = NIM + ",n";
+                    }
+                    sock[idx].send(data);
+                    Thread.Sleep(3000);
 
-                string NIM = listNIM.Items[0].Text;
-                string data;
-                if (isTwice[idx]) {
-                    data = NIM + ",y";
-                } else {
-                    data = NIM + ",n";
+                } catch (Exception excp) {
+                    time[idx].Stop();
+                    time[idx].reset();
+                    source.Enabled = true;
+                    MessageBox.Show("Client is not connected!");
                 }
-                sock[idx].send(data);
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
@@ -368,9 +382,12 @@ namespace PemiraServer
 
             // Timer's empty, stop
             if (count <= 0) {
-                sock[idx].send("({timeout})");
-                //add to DB
-
+                try {
+                    sock[idx].send("({timeout})");
+                    //add to DB
+                } catch (IOException excpt) {
+                    MessageBox.Show("Client disconnected!");
+                }
 
                 if (isTwice[idx]) {
                     t.counter = TimerCountdown.MAXCOUNT;
@@ -379,23 +396,31 @@ namespace PemiraServer
                     isTwice[idx] = false;
                     t.Stop();
                     t.reset();
-                    dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "999");
+                    dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "A");
                 } else {
                     sock[idx].disconnect();
                     //tandain NIM x udah vote di database
+                    dbDpt.setSudahPilih(listNIM.Items.ToString(), true);
                     if (isS1[idx])
                     {
-                        dbDpt.setChoiceKM(listNIM.Items.ToString(), "999");
+                        dbDpt.setChoiceKM(listNIM.Items.ToString(), "A");
                     }
                     else
                     {
-                        dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "999");
+                        dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "A");
                     }
                     STOP_VOTE(listNIM, bGrant, t, lTimer);
                 }
             } else {
-                data = "({" + count.ToString() + "})";
-                sock[idx].send(data);
+                try {
+                    data = "({" + count.ToString() + "})";
+                    sock[idx].send(data);
+                } catch (IOException excp) {
+                    t.Stop();
+                    t.reset();
+                    bGrant.Enabled = true;
+                    MessageBox.Show("Client disconnected!");
+                }
             }
         }
 
@@ -456,7 +481,7 @@ namespace PemiraServer
                         }
 
                         MessageBox.Show(msg);
-                        this.Close();
+                        //this.Close();
                     }
                 }
             }
