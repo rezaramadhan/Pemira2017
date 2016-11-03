@@ -193,6 +193,7 @@ namespace PemiraServer
             if (args[0] == "K3M") {
                 dbDpt.setChoiceKM(args[2], args[1]);
             } else if (args[0] == "MWA") {
+                dbDpt.setSudahPilih(args[2], true);
                 dbDpt.setChoiceMWAWM(args[2], args[1]);
             }
 
@@ -263,7 +264,7 @@ namespace PemiraServer
         private void validasiNIM() {
             //DITAMBAHIN ALSON, tapi entah kenapa ga ngecek
             if (dbDpt.isExistInDB(textBoxNIM.Text)) {
-                if (!dbDpt.isAlreadyPickedMWAWM(textBoxNIM.Text)) {
+                if (!dbDpt.getSudahPilih(textBoxNIM.Text)) {
                     if (!dbQBilik1.isExistInDB(textBoxNIM.Text)) {
                         if (!dbQBilik2.isExistInDB(textBoxNIM.Text)) {
                             if (!dbWaitingList.isExistInDB(textBoxNIM.Text)) {
