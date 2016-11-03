@@ -20,8 +20,8 @@ namespace PemiraServer
         private bool[] isTwice;
         private bool[] isS1;
         private const int MAXWAITING = 2;
-        private string[] host = { "169.254.1.1", "169.254.1.3" };
-        //private string[] host = { "127.0.0.1", "127.0.0.1" };
+        //private string[] host = { "169.254.1.1", "169.254.1.3" };
+        private string[] host = { "127.0.0.1", "127.0.0.1" };
         private int nPasswords = 5;
 
         private int port = 13514;
@@ -51,7 +51,7 @@ namespace PemiraServer
             InitializeListView();
             InitializeVariable();
             InitializeQueue();
-            //dbDpt.importCSV("E:/MOCKss.csv");
+            dbDpt.importCSV("E:/Contoh File DPT.csv");
             //dbDpt.printDB();
             //dbDpt.exportCSVmwawm("E:/MWA.csv");
             //dbDpt.exportCSVkm("E:/K3M.csv");
@@ -397,18 +397,18 @@ namespace PemiraServer
                     isTwice[idx] = false;
                     t.Stop();
                     t.reset();
-                    dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "A");
+                    dbDpt.setChoiceMWAWM(listNIM.Items[0].Text, "A");
                 } else {
                     sock[idx].disconnect();
                     //tandain NIM x udah vote di database
-                    dbDpt.setSudahPilih(listNIM.Items.ToString(), true);
+                    dbDpt.setSudahPilih(listNIM.Items[0].Text, true);
                     if (isS1[idx])
                     {
-                        dbDpt.setChoiceKM(listNIM.Items.ToString(), "A");
+                        dbDpt.setChoiceKM(listNIM.Items[0].Text, "A");
                     }
                     else
                     {
-                        dbDpt.setChoiceMWAWM(listNIM.Items.ToString(), "A");
+                        dbDpt.setChoiceMWAWM(listNIM.Items[0].Text, "A");
                     }
                     STOP_VOTE(listNIM, bGrant, t, lTimer);
                 }

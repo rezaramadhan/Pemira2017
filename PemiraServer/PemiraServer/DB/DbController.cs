@@ -727,7 +727,8 @@ namespace PemiraServer
         {
             string find = "nim = '" + nim + "'";
             DataRow[] foundRows = dt.Select(find);
-            if ((string)foundRows[0]["sudahPilih"] == "0")
+            //Debug.WriteLine(foundRows[0]["sudahpilih"].ToString());
+            if (foundRows[0]["sudahPilih"].ToString() == "False")
             {
                 return false;
             }
