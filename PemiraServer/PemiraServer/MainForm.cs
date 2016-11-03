@@ -51,7 +51,7 @@ namespace PemiraServer
             InitializeListView();
             InitializeVariable();
             InitializeQueue();
-            dbDpt.importCSV("E:/Contoh File DPT.csv");
+            //dbDpt.importCSV("E:/Contoh File DPT.csv");
             //dbDpt.printDB();
             //dbDpt.exportCSVmwawm("E:/MWA.csv");
             //dbDpt.exportCSVkm("E:/K3M.csv");
