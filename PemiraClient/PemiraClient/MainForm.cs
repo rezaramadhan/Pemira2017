@@ -85,17 +85,37 @@ namespace PemiraClient
         
         private void MainForm_Load(object sender, EventArgs e)
         {
-            //killExplorer(); //GALAU MAU PAKE ATAU ENGGA
-            GBWelcomeScreen.Location = new Point(6, 12);
-            GBTerimaKasih.Location = new Point(6, 12);
-            GBPilihMWA.Location = new Point(6, 12);
-            GBPilihKetuaKM.Location = new Point(6, 12);
+            int GBWidth = 1000;
+            int GBHeight = 562;
+            killExplorer(); //GALAU MAU PAKE ATAU ENGGA
+
+            StartPosition = FormStartPosition.CenterScreen;
+            Size = new Size(1024, 590);
+
+            /*Welcome Screen=============================*/
+            GBWelcomeScreen.Size = new Size(GBWidth, GBHeight);
+            GBWelcomeScreen.Location = new Point(12, 12);
+            GBWelcomeScreen.Visible = false;
+            /*===========================================*/
+            /*MWA========================================*/
+            GBPilihMWA.Size = new Size(GBWidth, GBHeight);
+            GBPilihMWA.Location = new Point(12, 12);
+            GBPilihMWA.Visible = false;
+            /*===========================================*/
+            /*KM=========================================*/
+            GBPilihKetuaKM.Size = new Size(GBWidth, GBHeight);
+            GBPilihKetuaKM.Location = new Point(12, 12);
+            GBPilihKetuaKM.Visible = false;
+            /*===========================================*/
+            /*Terima Kasih===============================*/
+            GBTerimaKasih.Size = new Size(GBWidth, GBHeight);
+            GBTerimaKasih.Location = new Point(12, 12);
+            GBTerimaKasih.Visible = false;
+            /*===========================================*/
             KeyPreview = true;
             ControlBox = false;
             MinimizeBox = false;
             MaximizeBox = false;
-            StartPosition = FormStartPosition.CenterScreen;
-            
             ThreadingServer = new Thread(StartServer);
             ThreadingServer.IsBackground = true;
             ThreadingServer.Start();
@@ -252,7 +272,7 @@ namespace PemiraClient
                             else if (firstRead[1] == "n")
                             {
                                 Invoke(changeGB, GBTerimaKasih);
-                                System.Threading.Thread.Sleep(1000);
+                                System.Threading.Thread.Sleep(3000);
                                 sendBytes = Encoding.ASCII.GetBytes("DONE");
                                 networkStream.Write(sendBytes, 0, sendBytes.Length);
                                 networkStream.Flush();
@@ -261,7 +281,7 @@ namespace PemiraClient
                         else if (GBPilihKetuaKM.Visible)
                         {
                             Invoke(changeGB, GBTerimaKasih);
-                            System.Threading.Thread.Sleep(1000);
+                            System.Threading.Thread.Sleep(3000);
                             sendBytes = Encoding.ASCII.GetBytes("DONE");
                             networkStream.Write(sendBytes, 0, sendBytes.Length);
                             networkStream.Flush();
@@ -285,7 +305,7 @@ namespace PemiraClient
                                 else if (firstRead[1] == "n")
                                 {
                                     Invoke(changeGB, GBTerimaKasih);
-                                    System.Threading.Thread.Sleep(1000);
+                                    System.Threading.Thread.Sleep(3000);
                                     sendBytes = Encoding.ASCII.GetBytes("DONE");
                                     networkStream.Write(sendBytes, 0, sendBytes.Length);
                                     networkStream.Flush();
@@ -294,7 +314,7 @@ namespace PemiraClient
                             else if (GBPilihKetuaKM.Visible)
                             {
                                 Invoke(changeGB, GBTerimaKasih);
-                                System.Threading.Thread.Sleep(1000);
+                                System.Threading.Thread.Sleep(3000);
                                 sendBytes = Encoding.ASCII.GetBytes("DONE");
                                 networkStream.Write(sendBytes, 0, sendBytes.Length);
                                 networkStream.Flush();
@@ -334,7 +354,7 @@ namespace PemiraClient
         {
             if (GBPilihKetuaKM.Visible)
             {
-                if (e.KeyChar >= '1' && e.KeyChar <= '2')
+                if (e.KeyChar >= '1' && e.KeyChar <= '3')
                 {
                     nPress = e.KeyChar;
                 }

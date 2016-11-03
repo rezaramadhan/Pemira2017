@@ -63,9 +63,9 @@ namespace PemiraClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap face_09 {
+        internal static System.Drawing.Bitmap km1 {
             get {
-                object obj = ResourceManager.GetObject("face_09", resourceCulture);
+                object obj = ResourceManager.GetObject("km1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -73,9 +73,9 @@ namespace PemiraClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap face_PNG5646 {
+        internal static System.Drawing.Bitmap thankyou2 {
             get {
-                object obj = ResourceManager.GetObject("face_PNG5646", resourceCulture);
+                object obj = ResourceManager.GetObject("thankyou2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -83,9 +83,9 @@ namespace PemiraClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Logo_Keluarga_Mahasiswa_ITB {
+        internal static System.Drawing.Bitmap vote {
             get {
-                object obj = ResourceManager.GetObject("Logo_Keluarga_Mahasiswa_ITB", resourceCulture);
+                object obj = ResourceManager.GetObject("vote", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,39 +93,9 @@ namespace PemiraClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Logo_Pemira_KM_ITB {
+        internal static System.Drawing.Bitmap welcome1 {
             get {
-                object obj = ResourceManager.GetObject("Logo_Pemira_KM_ITB", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap m_01_32__gr {
-            get {
-                object obj = ResourceManager.GetObject("m_01_32__gr", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap MOST_BEAUTIFUL_FACES {
-            get {
-                object obj = ResourceManager.GetObject("MOST_BEAUTIFUL_FACES", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap rexfeatures_5550767em_large_trans__QJoTHvv9hWAiaCwwE8274nuY336Pi7lpxqorZxKT9NA {
-            get {
-                object obj = ResourceManager.GetObject("rexfeatures_5550767em_large_trans__QJoTHvv9hWAiaCwwE8274nuY336Pi7lpxqorZxKT9NA", resourceCulture);
+                object obj = ResourceManager.GetObject("welcome1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

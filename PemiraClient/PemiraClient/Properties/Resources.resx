@@ -118,25 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="face_PNG5646" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\face_PNG5646.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="km1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\km1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Logo_Keluarga_Mahasiswa_ITB" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Logo Keluarga Mahasiswa ITB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="thankyou2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\thankyou2.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Logo_Pemira_KM_ITB" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Logo Pemira KM ITB.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="vote" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vote.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="MOST_BEAUTIFUL_FACES" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\MOST-BEAUTIFUL-FACES.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="m_01_32__gr" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\m(01-32)_gr.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="face_09" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\face-09.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="rexfeatures_5550767em_large_trans__QJoTHvv9hWAiaCwwE8274nuY336Pi7lpxqorZxKT9NA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\rexfeatures_5550767em-large_trans++QJoTHvv9hWAiaCwwE8274nuY336Pi7lpxqorZxKT9NA.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="welcome1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\welcome1.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
