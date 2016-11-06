@@ -63,6 +63,26 @@ namespace PemiraClient.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap aaaa_1 {
+            get {
+                object obj = ResourceManager.GetObject("aaaa 1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap aaaa_2 {
+            get {
+                object obj = ResourceManager.GetObject("aaaa 2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap km1 {
             get {
                 object obj = ResourceManager.GetObject("km1", resourceCulture);

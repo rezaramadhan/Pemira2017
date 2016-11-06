@@ -181,8 +181,8 @@ namespace PemiraClient
 
         //Declare and Initialize the IP Adress
         //static IPAddress ipAd = IPAddress.Parse("192.168.43.90");
-        //static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
-        static IPAddress ipAd = IPAddress.Parse("169.254.1.1");
+        static IPAddress ipAd = IPAddress.Parse("127.0.0.1");
+        //static IPAddress ipAd = IPAddress.Parse("169.254.1.1");
         //static IPAddress ipAd = IPAddress.Parse("167.205.66.210");
         //Declare and Initilize the Port Number;
         static int PortNumber = 13514;
@@ -221,7 +221,14 @@ namespace PemiraClient
             Debug.WriteLine(firstRead[1]);
             Invoke(DelegateTeste_ModifyText, firstRead[0],labelNIM);
             System.Threading.Thread.Sleep(3000);
+            ManualMWA MMWA = new ManualMWA();
+            MMWA.TopMost = true;
+            MMWA.StartPosition = FormStartPosition.CenterScreen;
+            MMWA.ShowDialog();
+            networkStream1.Write(Encoding.ASCII.GetBytes("manualMWA"), 0, 9);
+            networkStream1.Flush();
             Invoke(changeGB, GBPilihMWA);
+            MMWA.Dispose();
             while (true)
             {
                 try
@@ -234,7 +241,7 @@ namespace PemiraClient
                     Debug.WriteLine(dataFromClient);
                     if (GBPilihMWA.Visible)
                     {
-                        Invoke(DelegateTeste_ModifyText, dataFromClient, labelTimer);
+                        Invoke(DelegateTeste_ModifyText,dataFromClient, labelTimer);
                     }
                     else if (GBPilihKetuaKM.Visible)
                     {
@@ -262,7 +269,12 @@ namespace PemiraClient
                         {
                             if (firstRead[1] == "y")
                             {
-                                MessageBox.Show("Pemilu akan dilanjutkan dengan pemilihan Ketua Kabinet KM ITB");
+                                //MessageBox.Show("Pemilu akan dilanjutkan dengan pemilihan Ketua Kabinet KM ITB");
+                                //MessageBox.Show("Pemilu", "akan", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, (MessageBoxOptions)0x40000);
+                                transitionScreen tS = new transitionScreen();
+                                tS.StartPosition = FormStartPosition.CenterScreen;
+                                tS.TopMost = true;
+                                tS.ShowDialog();
                                 serverResponse = "ready";
                                 sendBytes = Encoding.ASCII.GetBytes(serverResponse);
                                 networkStream.Write(sendBytes, 0, sendBytes.Length);
@@ -295,7 +307,12 @@ namespace PemiraClient
                             {
                                 if (firstRead[1] == "y")
                                 {
-                                    MessageBox.Show("Pemilu akan dilanjutkan dengan pemilihan Ketua Kabinet KM ITB");
+                                    //MessageBox.Show("Pemilu akan dilanjutkan dengan pemilihan Ketua Kabinet KM ITB");
+                                    //MessageBox.Show("Pemilu", "akan", MessageBoxButtons.OK, MessageBoxIcon.None, MessageBoxDefaultButton.Button1, (MessageBoxOptions)0x40000);
+                                    transitionScreen tS = new transitionScreen();
+                                    tS.StartPosition = FormStartPosition.CenterScreen;
+                                    tS.TopMost = true;
+                                    tS.ShowDialog();
                                     serverResponse = "ready";
                                     sendBytes = Encoding.ASCII.GetBytes(serverResponse);
                                     networkStream.Write(sendBytes, 0, sendBytes.Length);
@@ -339,7 +356,14 @@ namespace PemiraClient
                     Debug.WriteLine(firstRead[1]);
                     Invoke(DelegateTeste_ModifyText, firstRead[0],labelNIM);
                     System.Threading.Thread.Sleep(3000);
+                    MMWA = new ManualMWA();
+                    MMWA.TopMost = true;
+                    MMWA.StartPosition = FormStartPosition.CenterScreen;
+                    MMWA.ShowDialog();
+                    networkStream1.Write(Encoding.ASCII.GetBytes("manualMWA"), 0, 9);
+                    networkStream1.Flush();
                     Invoke(changeGB, GBPilihMWA);
+                    MMWA.Dispose();
                 }
 
             }
