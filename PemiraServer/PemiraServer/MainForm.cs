@@ -33,7 +33,7 @@ namespace PemiraServer
         private dbKunciPasswordsController dbPasswords = new dbKunciPasswordsController();
 
         /*
-            Constructors             
+            Constructors
         */
         public MainForm()
         {
@@ -46,7 +46,7 @@ namespace PemiraServer
                     ip.ShowDialog();
                 }
             }
-            
+
             InitializeComponent();
             InitializeListView();
             InitializeVariable();
@@ -61,7 +61,7 @@ namespace PemiraServer
         }
 
         /*
-            Initialize all data members in this class            
+            Initialize all data members in this class
         */
         private void InitializeVariable() {
             isTwice = new bool[MAXWAITING];
@@ -78,7 +78,7 @@ namespace PemiraServer
             dbImport.setImportStatusLabel(importStatusLabel);
             dbImport.updateImportStatusLabel();
         }
-        
+
         private void InitializeQueue() {
             loadQueueFromDB();
             string s;
@@ -123,9 +123,9 @@ namespace PemiraServer
                 listViewBilik2.Items.Add(NIM);
             }
         }
-     
+
         /*
-            Function to add the content of textBoxNIM to waiting list            
+            Function to add the content of textBoxNIM to waiting list
         */
         private void addToWaiting()
         {
@@ -172,7 +172,7 @@ namespace PemiraServer
 
             // Add from listWaiting to bilik
             if (listViewWaiting.Items.Count > 0) {
-                
+
                 string s = listViewWaiting.Items[0].Text;
                 listNIM.Items.Add(s);
                 //DITAMBAHIN ALSON
@@ -180,7 +180,7 @@ namespace PemiraServer
                 listViewWaiting.Items.RemoveAt(0);
             }
             //sleep selama sekian detik
-            //Thread.Sleep(3000);
+            Thread.Sleep(3000);
             bGrant.Enabled = true;
             t.Stop();
             t.reset();
@@ -211,10 +211,10 @@ namespace PemiraServer
                 bGrant = buttonGrant2;
                 lTimer = labelTimerBilik2;
                 listNIM = listViewBilik2;
-                labelTimerBilik2.Text = TimerCountdown.MAXCOUNT.ToString();    
+                labelTimerBilik2.Text = TimerCountdown.MAXCOUNT.ToString();
             }
 
-            
+
             if(!isTwice[i]) { //stop proses buat NIM x
                 sock[i].disconnect();
                 STOP_VOTE(listNIM, bGrant, time[i], lTimer);
@@ -262,7 +262,7 @@ namespace PemiraServer
         }
 
         /*
-            Event handler when button submit clicked             
+            Event handler when button submit clicked
         */
         private void buttonSubmitNIM_Click(object sender, EventArgs e)
         {
@@ -295,7 +295,7 @@ namespace PemiraServer
         }
 
         /*
-            Event handler when enter pressed while typing textBoxNIM 
+            Event handler when enter pressed while typing textBoxNIM
         */
         private void enter_pressed(object sender, KeyEventArgs e)
         {
@@ -304,9 +304,9 @@ namespace PemiraServer
                 validasiNIM();
             }
         }
-        
+
         /*
-            Event handler when a buttonGrant is clicked             
+            Event handler when a buttonGrant is clicked
         */
         private void buttonGrant_Click(object sender, EventArgs e)
         {
@@ -350,11 +350,11 @@ namespace PemiraServer
             } else { //gagal
                 MessageBox.Show("Tidak ada NIM pada antrian!");
             }
-            
+
         }
 
         /*
-           Event handler for when a timer ticks             
+           Event handler for when a timer ticks
        */
         private void time_Tick(object sender, EventArgs e) {
             TimerCountdown t = sender as TimerCountdown;
@@ -382,7 +382,7 @@ namespace PemiraServer
             lTimer.Text = count.ToString();
 
             // Check if should choose K3M
-            
+
 
             // Timer's empty, stop
             if (count <= 0) {
@@ -395,7 +395,7 @@ namespace PemiraServer
 
                 if (isTwice[idx]) {
                     t.counter = TimerCountdown.MAXCOUNT;
-                    
+
                     count = t.counter;
                     isTwice[idx] = false;
                     t.Stop();
