@@ -230,10 +230,15 @@ namespace PemiraServer
             isTwice[i] = false;
         }
 
+        private void TIME_START(int i) {
+            time[i].Start();
+        }
+
         private void TCPrecv(Object i) {
             int idx = (int) i ;
             Action<string[], int> Delegate_AcceptVote = ACCEPT_VOTE;
             Action<int> Delegate_StartVote = START_VOTE;
+            Action<int> Delegate_TimeStart = TIME_START;
 
             string s = "aa";
             while (s != "") {
@@ -246,6 +251,8 @@ namespace PemiraServer
                     } else if (listArg[0] == "ready") {
                         //Debug.WriteLine("READY");
                         Invoke(Delegate_StartVote, idx);
+                    } else if (listArg[0] == "manualMWA") {
+                        Invoke(Delegate_TimeStart, idx);
                     }
                 } catch (IOException e) {
                     s = "";
@@ -323,7 +330,6 @@ namespace PemiraServer
                 }
 
                 source.Enabled = false;
-                time[idx].Start();
                 try {
                     sock[idx].connect();
                     Thread trd = new Thread(TCPrecv);
@@ -336,11 +342,7 @@ namespace PemiraServer
                         data = NIM + ",n";
                     }
                     sock[idx].send(data);
-                    Thread.Sleep(3000);
-
                 } catch (Exception excp) {
-                    time[idx].Stop();
-                    time[idx].reset();
                     source.Enabled = true;
                     MessageBox.Show("Client is not connected!");
                 }
@@ -414,7 +416,7 @@ namespace PemiraServer
                 }
             } else {
                 try {
-                    data = "({" + count.ToString() + "})";
+                    data = count.ToString();
                     sock[idx].send(data);
                 } catch (IOException excp) {
                     t.Stop();

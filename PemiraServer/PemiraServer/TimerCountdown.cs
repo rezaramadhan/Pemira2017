@@ -10,7 +10,7 @@ namespace PemiraServer
     class TimerCountdown : Timer
     {
         private int jarak = 1000;
-        public static int MAXCOUNT = 10;
+        public static int MAXCOUNT = 20;
         public int counter;
 
         public TimerCountdown(string s)
