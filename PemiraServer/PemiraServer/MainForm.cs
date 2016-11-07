@@ -20,8 +20,8 @@ namespace PemiraServer
         private bool[] isTwice;
         private bool[] isS1;
         private const int MAXWAITING = 2;
-        //private string[] host = { "169.254.1.1", "169.254.1.3" };
-        private string[] host = { "127.0.0.1", "127.0.0.1" };
+        private string[] host = { "169.254.1.2", "169.254.1.3" };
+        //private string[] host = { "127.0.0.1", "127.0.0.1" };
         private int nPasswords = 5;
 
         private int port = 13514;
@@ -179,7 +179,8 @@ namespace PemiraServer
                 dbWaitingList.delNim(listViewWaiting.Items[0].Text);
                 listViewWaiting.Items.RemoveAt(0);
             }
-
+            //sleep selama sekian detik
+            //Thread.Sleep(3000);
             bGrant.Enabled = true;
             t.Stop();
             t.reset();

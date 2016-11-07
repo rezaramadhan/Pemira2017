@@ -186,7 +186,7 @@ namespace PemiraServer
             this.labelTimerBilik1.Name = "labelTimerBilik1";
             this.labelTimerBilik1.Size = new System.Drawing.Size(34, 25);
             this.labelTimerBilik1.TabIndex = 9;
-            this.labelTimerBilik1.Text = "10";
+            this.labelTimerBilik1.Text = TimerCountdown.MAXCOUNT.ToString();
             // 
             // labelBilikNIM2
             // 
@@ -234,7 +234,7 @@ namespace PemiraServer
             this.labelTimerBilik2.Name = "labelTimerBilik2";
             this.labelTimerBilik2.Size = new System.Drawing.Size(34, 25);
             this.labelTimerBilik2.TabIndex = 13;
-            this.labelTimerBilik2.Text = "10";
+            this.labelTimerBilik2.Text = TimerCountdown.MAXCOUNT.ToString();
             // 
             // panel3
             // 
