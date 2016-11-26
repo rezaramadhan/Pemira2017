@@ -186,7 +186,7 @@ namespace PemiraServer
             this.labelTimerBilik1.Name = "labelTimerBilik1";
             this.labelTimerBilik1.Size = new System.Drawing.Size(34, 25);
             this.labelTimerBilik1.TabIndex = 9;
-            this.labelTimerBilik1.Text = "10";
+            this.labelTimerBilik1.Text = TimerCountdown.MAXCOUNT.ToString();
             // 
             // labelBilikNIM2
             // 
@@ -234,7 +234,7 @@ namespace PemiraServer
             this.labelTimerBilik2.Name = "labelTimerBilik2";
             this.labelTimerBilik2.Size = new System.Drawing.Size(34, 25);
             this.labelTimerBilik2.TabIndex = 13;
-            this.labelTimerBilik2.Text = "10";
+            this.labelTimerBilik2.Text = TimerCountdown.MAXCOUNT.ToString();
             // 
             // panel3
             // 
@@ -276,9 +276,9 @@ namespace PemiraServer
             this.import.ForeColor = System.Drawing.Color.Black;
             this.import.Location = new System.Drawing.Point(162, 592);
             this.import.Name = "import";
-            this.import.Size = new System.Drawing.Size(117, 17);
+            this.import.Size = new System.Drawing.Size(149, 17);
             this.import.TabIndex = 12;
-            this.import.Text = "Database Status:";
+            this.import.Text = "DPT Database Status:";
             // 
             // importStatusLabel
             // 
@@ -297,7 +297,7 @@ namespace PemiraServer
             this.exportButton.Name = "exportButton";
             this.exportButton.Size = new System.Drawing.Size(125, 61);
             this.exportButton.TabIndex = 14;
-            this.exportButton.Text = "Export File Kotak Suara";
+            this.exportButton.Text = "Export Semua Pilihan";
             this.exportButton.UseVisualStyleBackColor = true;
             this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
             // 
